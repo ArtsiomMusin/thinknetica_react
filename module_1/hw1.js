@@ -59,23 +59,20 @@ const three_items = [
     text: "Beeball"
   }
 ];
-var i = 0;
-const list = three_items.map((item) =>
+const list = _.map(three_items, (item, index) =>
   DOM.li(
-    { key: i++ },
+    { key: index },
     React.createElement(BlogItem, {src: item.src, text: item.text})
   )
 );
 
-_.forEach(three_items, function(item) {
-  ReactDOM.render(
-    DOM.ul(
-      null,
-      list
-    ),
-    document.getElementById("blogitem")
-  );
-});
+ReactDOM.render(
+  DOM.ul(
+    null,
+    list
+  ),
+  document.getElementById("blogitem")
+);
 
 // BlogList component
 class BlogList extends React.Component {
