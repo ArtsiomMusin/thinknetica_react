@@ -1,33 +1,49 @@
-const BlogItem = (props) => (
-  DOM.div(
-    null,
-    React.createElement(
-      Image,
-      {
-        src: props.src
-      }
-    ),
-    React.createElement(TextBox, {text: props.text}),
-    DOM.span(null, `(Written by ${props.author})`),
-    DOM.div(
-      null,
-      props.created && DOM.div(null, `Created: ${props.created}`),
-      props.updated && DOM.div(null, `Updated: ${props.updated}`)
-    )
-  )
-);
+class BlogItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = props;
 
+    this.handleClick = _.bind(this.handleClick, this);
+  }
+  handleClick() {
+    this.setState({ likes: this.state.likes + 1})
+  }
+  render() {
+    return DOM.div(
+      null,
+      React.createElement(
+        Image,
+        {
+          src: this.props.src
+        }
+      ),
+      React.createElement(TextBox, {text: this.props.text}),
+      DOM.span(null, `(Written by ${this.props.author})`),
+      DOM.div(
+        null,
+        this.props.created && DOM.div(null, `Created: ${this.props.created}`),
+        this.props.updated && DOM.div(null, `Updated: ${this.props.updated}`)
+      ),
+      DOM.div(
+        null,
+        DOM.span(null, `Likes: ${this.state.likes}`),
+        DOM.button({onClick: this.handleClick}, 'Like')
+      )
+    );
+  }
+}
 BlogItem.propTypes = {
   author: PropTypes.string,
   created: PropTypes.string,
-  updated: PropTypes.string
+  updated: PropTypes.string,
+  likes: PropTypes.number
 };
-
 
 BlogItem.defaultProps = {
   author: 'Unknown',
   created: null,
-  updated: null
+  updated: null,
+  likes: 0
 };
 
 const three_items = [
