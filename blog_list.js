@@ -8,18 +8,16 @@ class BlogList extends React.Component {
     return DOM.ul(
       null,
       _.map(
-        this.state.list,
+        this.state.items,
         (item, key) => (
           DOM.li(
             {key},
             React.createElement(
               BlogItem,
               {
-                src: item.src,
+                image: item.image,
                 text: item.text,
-                author: item.author,
-                created: item.created,
-                updated: item.updated
+                meta: item.meta
               }
             )
           )
@@ -30,15 +28,15 @@ class BlogList extends React.Component {
 }
 
 BlogList.propTypes = {
-  list: PropTypes.array
+  items: PropTypes.array
 };
 
 
 BlogList.defaultProps = {
-  list: []
+  items: []
 };
 
 ReactDOM.render(
-  React.createElement(BlogList, {list: three_items}),
+  React.createElement(BlogList, {items: threeItems}),
   document.getElementById("bloglist")
 );

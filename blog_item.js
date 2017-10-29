@@ -1,7 +1,7 @@
 class BlogItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = props;
+    this.state = {likes: props.likes};
 
     this.handleClick = _.bind(this.handleClick, this);
   }
@@ -9,20 +9,16 @@ class BlogItem extends React.Component {
     this.setState({ likes: this.state.likes + 1})
   }
   render() {
+    const {image, meta, text} = this.props;
     return DOM.div(
       null,
-      React.createElement(
-        Image,
-        {
-          src: this.props.src
-        }
-      ),
-      React.createElement(TextBox, {text: this.props.text}),
-      DOM.span(null, `(Written by ${this.props.author})`),
+      React.createElement(Image, { src: image.src } ),
+      React.createElement(TextBox, {}, text),
+      DOM.span(null, `(Written by ${meta.author})`),
       DOM.div(
         null,
-        this.props.created && DOM.div(null, `Created: ${this.props.created}`),
-        this.props.updated && DOM.div(null, `Updated: ${this.props.updated}`)
+        meta.created && DOM.div(null, `Created: ${meta.created}`),
+        meta.updated && DOM.div(null, `Updated: ${meta.updated}`)
       ),
       DOM.div(
         null,
@@ -39,6 +35,7 @@ BlogItem.propTypes = {
   likes: PropTypes.number
 };
 
+
 BlogItem.defaultProps = {
   author: 'Unknown',
   created: null,
@@ -46,38 +43,41 @@ BlogItem.defaultProps = {
   likes: 0
 };
 
-const three_items = [
+const threeItems = [
   {
-    src: "https://goo.gl/9CzY5E",
-    text: "I'm a good guy",
-    author: "Artem",
-    created: moment("20120120").format("YYYY-MM-DD"),
-    updated: moment("20170720").format("YYYY-MM-DD")
-
+    image: { src: "https://goo.gl/9CzY5E"},
+    meta: {
+      author: "Artem",
+      created: formatDate("20120120"),
+      updated: formatDate("20170720")
+    },
+    text: "I'm a good guy"
   },
   {
-    src: "https://goo.gl/J4q89x",
-    text: "Flower!",
-    author: "Vasya",
-    created: moment("20150320").format("YYYY-MM-DD")
+    image: { src: "https://goo.gl/J4q89x" },
+    meta: {
+      author: "Vasya",
+      created: formatDate("20150320")
+    },
+    text: "Flower!"
   },
   {
-    src: "https://goo.gl/emZYMB",
-    text: "Beeball",
-    updated: moment("19800320").format("YYYY-MM-DD")
+    image: { src: "https://goo.gl/emZYMB" },
+    meta: {
+      updated: formatDate("19800320")
+    },
+    text: "Beeball"
   }
 ];
-const list = _.map(three_items, (item, index) =>
+const list = _.map(threeItems, (item, index) =>
   DOM.li(
     { key: index },
     React.createElement(
       BlogItem,
       {
-        src: item.src,
+        image: item.image,
         text: item.text,
-        author: item.author,
-        created: item.created,
-        updated: item.updated
+        meta: item.meta
       }
     )
   )
