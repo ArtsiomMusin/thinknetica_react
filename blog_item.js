@@ -1,13 +1,8 @@
 class BlogItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {likes: props.likes};
+  }
 
-    this.handleClick = _.bind(this.handleClick, this);
-  }
-  handleClick() {
-    this.setState({ likes: this.state.likes + 1})
-  }
   render() {
     const {image, meta, text} = this.props;
     return DOM.div(
@@ -20,27 +15,21 @@ class BlogItem extends React.Component {
         meta.created && DOM.div(null, `Created: ${meta.created}`),
         meta.updated && DOM.div(null, `Updated: ${meta.updated}`)
       ),
-      DOM.div(
-        null,
-        DOM.span(null, `Likes: ${this.state.likes}`),
-        DOM.button({onClick: this.handleClick}, 'Like')
-      )
+      React.createElement(Like, {count: meta.likes_count})
     );
   }
 }
 BlogItem.propTypes = {
   author: PropTypes.string,
   created: PropTypes.string,
-  updated: PropTypes.string,
-  likes: PropTypes.number
+  updated: PropTypes.string
 };
 
 
 BlogItem.defaultProps = {
   author: 'Unknown',
   created: null,
-  updated: null,
-  likes: 0
+  updated: null
 };
 
 const threeItems = [
@@ -49,7 +38,8 @@ const threeItems = [
     meta: {
       author: "Artem",
       created: formatDate("20120120"),
-      updated: formatDate("20170720")
+      updated: formatDate("20170720"),
+      likes_count: 99
     },
     text: "I'm a good guy"
   },
@@ -64,7 +54,8 @@ const threeItems = [
   {
     image: { src: "https://goo.gl/emZYMB" },
     meta: {
-      updated: formatDate("19800320")
+      updated: formatDate("19800320"),
+      likes_count: 3
     },
     text: "Beeball"
   }
