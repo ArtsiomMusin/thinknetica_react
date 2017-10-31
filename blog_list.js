@@ -1,5 +1,3 @@
-const DOM = React.DOM;
-
 class BlogList extends React.Component {
   constructor(props) {
     super(props);
@@ -10,18 +8,35 @@ class BlogList extends React.Component {
     return DOM.ul(
       null,
       _.map(
-        this.state.list,
+        this.state.items,
         (item, key) => (
           DOM.li(
             {key},
-            React.createElement(BlogItem, {src: item.src, text: item.text})
+            React.createElement(
+              BlogItem,
+              {
+                image: item.image,
+                text: item.text,
+                meta: item.meta
+              }
+            )
           )
         )
       )
     )
   }
 }
+
+BlogList.propTypes = {
+  items: PropTypes.array
+};
+
+
+BlogList.defaultProps = {
+  items: []
+};
+
 ReactDOM.render(
-  React.createElement(BlogList, {list: three_items}),
+  React.createElement(BlogList, {items: threeItems}),
   document.getElementById("bloglist")
 );

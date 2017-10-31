@@ -1,46 +1,80 @@
-const DOM = React.DOM;
+class BlogItem extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-const BlogItem = ({src, text}) => (
-  DOM.div(
-    null,
-    React.createElement(
-      Image,
-      {
-        src: src,
-        width: "50",
-        height: "50",
-        alt: ""
-      }
-    ),
-    React.createElement(TextBox, {text: text})
-  )
-);
+  render() {
+    const {image, meta, text} = this.props;
+    return DOM.div(
+      null,
+      React.createElement(Image, { src: image.src } ),
+      React.createElement(TextBox, {}, text),
+      DOM.span(null, `(Written by ${meta.author})`),
+      DOM.div(
+        null,
+        meta.created && DOM.div(null, `Created: ${meta.created}`),
+        meta.updated && DOM.div(null, `Updated: ${meta.updated}`)
+      ),
+      React.createElement(Like, {count: meta.likes_count})
+    );
+  }
+}
+BlogItem.propTypes = {
+  author: PropTypes.string,
+  created: PropTypes.string,
+  updated: PropTypes.string
+};
 
-const three_items = [
+
+BlogItem.defaultProps = {
+  author: 'Unknown',
+  created: null,
+  updated: null
+};
+
+const threeItems = [
   {
-    src: "https://goo.gl/9CzY5E",
+    image: { src: "https://goo.gl/9CzY5E"},
+    meta: {
+      author: "Artem",
+      created: formatDate("20120120"),
+      updated: formatDate("20170720"),
+      likes_count: 99
+    },
     text: "I'm a good guy"
   },
   {
-    src: "https://goo.gl/J4q89x",
+    image: { src: "https://goo.gl/J4q89x" },
+    meta: {
+      author: "Vasya",
+      created: formatDate("20150320")
+    },
     text: "Flower!"
   },
   {
-    src: "https://goo.gl/emZYMB",
+    image: { src: "https://goo.gl/emZYMB" },
+    meta: {
+      updated: formatDate("19800320"),
+      likes_count: 3
+    },
     text: "Beeball"
   }
 ];
-const list = _.map(three_items, (item, index) =>
+const list = _.map(threeItems, (item, index) =>
   DOM.li(
     { key: index },
-    React.createElement(BlogItem, {src: item.src, text: item.text})
+    React.createElement(
+      BlogItem,
+      {
+        image: item.image,
+        text: item.text,
+        meta: item.meta
+      }
+    )
   )
 );
 
 ReactDOM.render(
-  DOM.ul(
-    null,
-    list
-  ),
+  DOM.ul(null, list),
   document.getElementById("blogitem")
 );
