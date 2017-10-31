@@ -17,7 +17,8 @@ class BlogList extends React.Component {
               {
                 image: item.image,
                 text: item.text,
-                meta: item.meta
+                meta: item.meta,
+                like: () => this.state.like(item.id)
               }
             )
           )

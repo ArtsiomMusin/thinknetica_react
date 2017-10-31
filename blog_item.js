@@ -1,10 +1,11 @@
 class BlogItem extends React.Component {
   constructor(props) {
     super(props);
+    this.state = props;
   }
 
   render() {
-    const {image, meta, text} = this.props;
+    const {image, meta, text, id} = this.state;
     return DOM.div(
       null,
       React.createElement(Image, { src: image.src } ),
@@ -15,7 +16,7 @@ class BlogItem extends React.Component {
         meta.created && DOM.div(null, `Created: ${meta.created}`),
         meta.updated && DOM.div(null, `Updated: ${meta.updated}`)
       ),
-      React.createElement(Like, {count: meta.likes_count})
+      React.createElement(Like, {count: meta.likes_count, like: this.state.like})
     );
   }
 }
@@ -34,6 +35,7 @@ BlogItem.defaultProps = {
 
 const threeItems = [
   {
+    id: '59f72ed596059543b33bb615',
     image: { src: "https://goo.gl/9CzY5E"},
     meta: {
       author: "Artem",
@@ -44,6 +46,7 @@ const threeItems = [
     text: "I'm a good guy"
   },
   {
+    id: '59f72ed596059543b33bb616',
     image: { src: "https://goo.gl/J4q89x" },
     meta: {
       author: "Vasya",
@@ -52,6 +55,7 @@ const threeItems = [
     text: "Flower!"
   },
   {
+    id: '59f72ed596059543b33bb617',
     image: { src: "https://goo.gl/emZYMB" },
     meta: {
       updated: formatDate("19800320"),
@@ -60,9 +64,9 @@ const threeItems = [
     text: "Beeball"
   }
 ];
-const list = _.map(threeItems, (item, index) =>
+const list = _.map(threeItems, (item) =>
   DOM.li(
-    { key: index },
+    { key: item.id },
     React.createElement(
       BlogItem,
       {
