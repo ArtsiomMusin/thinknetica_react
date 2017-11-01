@@ -32,7 +32,6 @@ BlogList.propTypes = {
   items: PropTypes.array
 };
 
-
 BlogList.defaultProps = {
   items: []
 };

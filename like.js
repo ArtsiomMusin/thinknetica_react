@@ -10,7 +10,6 @@ Like.propTypes = {
   count: PropTypes.number
 };
 
-
 Like.defaultProps = {
   count: 0
 };

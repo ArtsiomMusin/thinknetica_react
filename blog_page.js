@@ -10,11 +10,22 @@ class BlogPage extends React.Component {
     if(!obj.meta.likes_count){
       obj.meta.likes_count = 0;
     }
-    obj.meta.likes_count += 1;
+    obj.meta.likes_count += 1; // wtf I wrote here?
     this.setState({ count: obj.meta.likes_count});
   }
   render() {
-    return React.createElement(BlogList, {items: this.state.items, like: this.like})
+    const {items} = this.props;
+    const piechart_data = _.map(
+      items,
+      (item) => [
+        item.text, item.meta.likes_count
+      ]);
+    return DOM.div(
+        null,
+        React.createElement(BlogList, {items: items, like: this.like}),
+        <PieChart columns={piechart_data}/>,
+      );
+
   }
 }
 
