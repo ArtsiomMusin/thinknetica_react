@@ -15,7 +15,7 @@ class BlogItem extends React.Component {
         meta.created && DOM.div(null, `Created: ${meta.created}`),
         meta.updated && DOM.div(null, `Updated: ${meta.updated}`)
       ),
-      React.createElement(Like, {count: meta.likes_count, like: like})
+      React.createElement(Like, {count: meta.likesCount, like: like, id: id})
     );
   }
 }
@@ -39,7 +39,7 @@ const threeItems = [
       author: "Artem",
       created: formatDate("20120120"),
       updated: formatDate("20170720"),
-      likes_count: 30
+      likesCount: 30
     },
     text: "I'm a good guy"
   },
@@ -49,7 +49,7 @@ const threeItems = [
     meta: {
       author: "Vasya",
       created: formatDate("20150320"),
-      likes_count: 45
+      likesCount: 45
     },
     text: "Flower!"
   },
@@ -58,7 +58,7 @@ const threeItems = [
     image: { src: "https://goo.gl/emZYMB" },
     meta: {
       updated: formatDate("19800320"),
-      likes_count: 10
+      likesCount: 10
     },
     text: "Beeball"
   }

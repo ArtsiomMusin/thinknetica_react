@@ -6,19 +6,20 @@ class BlogPage extends React.Component {
   }
 
   like(id) {
-    var obj = _.find(this.state.items, ['id', id]);
-    if(!obj.meta.likes_count){
-      obj.meta.likes_count = 0;
+    const items = _.assign({}, this.state.items);
+    var obj = _.find(items, ['id', id]);
+    if(!obj.meta.likesCount){
+      obj.meta.likesCount = 0;
     }
-    obj.meta.likes_count += 1; // wtf I wrote here?
-    this.setState({ count: obj.meta.likes_count});
+    obj.meta.likesCount += 1;
+    this.setState({ items });
   }
   render() {
     const {items} = this.props;
     const piechart_data = _.map(
       items,
       (item) => [
-        item.text, item.meta.likes_count
+        item.text, item.meta.likesCount
       ]);
     return DOM.div(
         null,
