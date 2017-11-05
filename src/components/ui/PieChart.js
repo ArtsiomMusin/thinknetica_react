@@ -1,31 +1,32 @@
 import React from 'react';
-import DOM from 'react-dom-factories';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import c3 from 'c3';
 
 class PieChart extends React.Component {
   componentDidMount() {
-      this.chart = c3.generate({
-        bindto: ReactDOM.findDOMNode(this.refs.chart),
-        data: {
-          columns: this.props.columns,
-          type: this.props.type
-        }
-      })
+    this.chart = c3.generate({
+      bindto: ReactDOM.findDOMNode(this.refs.chart),
+      data: {
+        columns: this.props.columns,
+        type: this.props.type
+      }
+    });
   }
 
   componentWillUnmount() {
-    this.chart.destroy()
+    this.chart.destroy();
   }
 
   componentWillReceiveProps(newProps) {
     this.chart.load({
       columns: newProps.columns
-    })
+    });
   }
 
-  render(){
+  render() {
     return (
-      <div ref="chart" />
+      <div ref='chart' />
     );
   }
 }

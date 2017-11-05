@@ -1,4 +1,3 @@
-import React from 'react';
 import DOM from 'react-dom-factories';
 import PropTypes from 'prop-types';
 
@@ -11,7 +10,7 @@ TextBox.propTypes = {
 };
 
 TextBox.defaultProps = {
-  text: ""
+  text: ''
 };
 
 export default TextBox;
