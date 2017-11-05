@@ -1,14 +1,13 @@
 class BlogList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = props;
   }
 
   render() {
     return DOM.ul(
       null,
       _.map(
-        this.state.items,
+        this.props.items,
         (item, key) => (
           DOM.li(
             {key},
@@ -17,7 +16,9 @@ class BlogList extends React.Component {
               {
                 image: item.image,
                 text: item.text,
-                meta: item.meta
+                meta: item.meta,
+                like: this.props.like,
+                id: item.id
               }
             )
           )
@@ -30,7 +31,6 @@ class BlogList extends React.Component {
 BlogList.propTypes = {
   items: PropTypes.array
 };
-
 
 BlogList.defaultProps = {
   items: []
