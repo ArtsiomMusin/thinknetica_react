@@ -1,3 +1,7 @@
+import React from 'react';
+import DOM from 'react-dom-factories';
+import PropTypes from 'prop-types';
+
 class PieChart extends React.Component {
   componentDidMount() {
       this.chart = c3.generate({
@@ -36,3 +40,5 @@ PieChart.defaultProps = {
   columns: [['data1', 30], ['data2', 50]],
   type: 'pie'
 };
+
+export default PieChart;

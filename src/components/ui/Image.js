@@ -1,9 +1,6 @@
-const DOM = React.DOM;
-const PropTypes = React.PropTypes;
-
-var formatDate = function(date){
-  return moment(date).format("YYYY-MM-DD");
-};
+import React from 'react';
+import DOM from 'react-dom-factories';
+import PropTypes from 'prop-types';
 
 const Image = ({src, width, height, alt}) => (
   DOM.img({src, width, height, alt})
@@ -29,14 +26,4 @@ Image.defaultProps = {
   alt: ""
 };
 
-ReactDOM.render(
-  React.createElement(
-    Image,
-    {
-      width: "120",
-      height: "120",
-      alt: "Deadly cat on unicorn, yeah!"
-    }
-  ),
-  document.getElementById("image")
-);
+export default Image;

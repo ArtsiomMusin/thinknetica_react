@@ -1,3 +1,10 @@
+import React from 'react';
+import DOM from 'react-dom-factories';
+import PropTypes from 'prop-types';
+
+import BlogList from '../ui/BlogList';
+import PieChart from '../ui/PieChart';
+
 class BlogPage extends React.Component {
   constructor(props) {
     super(props);
@@ -30,16 +37,12 @@ class BlogPage extends React.Component {
   }
 }
 
-ReactDOM.render(
-  React.createElement(BlogPage, {items: threeItems}),
-  document.getElementById("blogpage")
-);
-
 BlogPage.propTypes = {
   items: PropTypes.array
 };
 
-
 BlogPage.defaultProps = {
   items: []
 };
+
+export default BlogPage;

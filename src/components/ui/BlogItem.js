@@ -1,3 +1,11 @@
+import React from 'react';
+import DOM from 'react-dom-factories';
+import PropTypes from 'prop-types';
+
+import Image from './Image';
+import TextBox from './TextBox';
+import Like from './Like';
+
 class BlogItem extends React.Component {
   constructor(props) {
     super(props);
@@ -63,21 +71,5 @@ const threeItems = [
     text: "Beeball"
   }
 ];
-const list = _.map(threeItems, (item) =>
-  DOM.li(
-    { key: item.id },
-    React.createElement(
-      BlogItem,
-      {
-        image: item.image,
-        text: item.text,
-        meta: item.meta
-      }
-    )
-  )
-);
 
-ReactDOM.render(
-  DOM.ul(null, list),
-  document.getElementById("blogitem")
-);
+export default BlogItem;

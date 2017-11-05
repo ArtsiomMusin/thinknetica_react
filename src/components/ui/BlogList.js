@@ -1,3 +1,9 @@
+import React from 'react';
+import DOM from 'react-dom-factories';
+import PropTypes from 'prop-types';
+
+import BlogItem from './BlogItem';
+
 class BlogList extends React.Component {
   constructor(props) {
     super(props);
@@ -36,7 +42,4 @@ BlogList.defaultProps = {
   items: []
 };
 
-ReactDOM.render(
-  React.createElement(BlogList, {items: threeItems}),
-  document.getElementById("bloglist")
-);
+export default BlogList;

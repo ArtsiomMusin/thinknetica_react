@@ -1,3 +1,7 @@
+import React from 'react';
+import DOM from 'react-dom-factories';
+import PropTypes from 'prop-types';
+
 const Like = ({count, like, id}) => (
   DOM.div(
     null,
@@ -13,3 +17,5 @@ Like.propTypes = {
 Like.defaultProps = {
   count: 0
 };
+
+export default Like;
