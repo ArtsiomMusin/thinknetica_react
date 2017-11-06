@@ -26,6 +26,17 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
+      },
+      {
+        test: /\.css$/,
+        loaders: [
+          'style-loader',
+          'css-loader?importLoaders=2'
+        ]
+      },
+      {
+        test: /\.(png|woff(2)?|eot|ttf|svg)([a-z0-9=.]+)?$/,
+        loader: 'url-loader?limit=100000' 
       }
     ]
   },
