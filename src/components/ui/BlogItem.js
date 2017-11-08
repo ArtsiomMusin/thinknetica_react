@@ -28,9 +28,11 @@ class BlogItem extends React.Component {
   }
 }
 BlogItem.propTypes = {
-  author: PropTypes.string,
-  created: PropTypes.string,
-  updated: PropTypes.string
+  image: PropTypes.string,
+  meta: PropTypes.array,
+  id: PropTypes.string,
+  text: PropTypes.string,
+  like: PropTypes.function
 };
 
 BlogItem.defaultProps = {
