@@ -1,11 +1,14 @@
 import React from 'react';
-import BlogPage from './components/containers/BlogPage';
-import {threeItems} from './components/static/items';
+import { Router, browserHistory} from 'react-router';
+import routes from 'routes';
 
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 
 const App = () => (
-  <BlogPage items={threeItems} />
+  <Router history={browserHistory} routes={routes} />
+  // <MainLayout>
+  //   <BlogPage items={threeItems} />
+  // </MainLayout>
 );
 
 export default App;

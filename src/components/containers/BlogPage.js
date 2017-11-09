@@ -2,6 +2,7 @@ import React from 'react';
 import DOM from 'react-dom-factories';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import {threeItems} from 'components/static/items';
 
 import BlogList from '../ui/BlogList';
 import PieChart from '../ui/PieChart';
@@ -42,7 +43,7 @@ BlogPage.propTypes = {
 };
 
 BlogPage.defaultProps = {
-  items: []
+  items: threeItems
 };
 
 export default BlogPage;

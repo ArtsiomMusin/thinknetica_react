@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import Image from './Image';
 import TextBox from './TextBox';
 import Like from './Like';
+import Link from 'components/elements/Link';
+import { postsPath } from 'components/helpers/routes';
 
 class BlogItem extends React.Component {
   constructor(props) {
@@ -16,14 +18,16 @@ class BlogItem extends React.Component {
     return DOM.div(
       null,
       React.createElement(Image, { src: image.src }),
-      React.createElement(TextBox, {}, text),
+      <Link to={postsPath(id)}>
+        <TextBox>{text}</TextBox>
+      </Link>,
       DOM.span(null, `(Written by ${meta.author})`),
       DOM.div(
         null,
         meta.created && DOM.div(null, `Created: ${meta.created}`),
         meta.updated && DOM.div(null, `Updated: ${meta.updated}`)
       ),
-      React.createElement(Like, {count: meta.likesCount, like, id})
+      like && React.createElement(Like, {count: meta.likesCount, like, id})
     );
   }
 }
