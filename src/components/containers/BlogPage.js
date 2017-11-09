@@ -2,16 +2,29 @@ import React from 'react';
 import DOM from 'react-dom-factories';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import {threeItems} from 'components/static/items';
+import request from 'superagent';
 
 import BlogList from '../ui/BlogList';
 import PieChart from '../ui/PieChart';
+import { RestApiServer } from 'components/helpers/routes';
 
 class BlogPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = props;
     this.like = _.bind(this.like, this);
+  }
+
+  componentDidMount() {
+    this.fetchPosts();
+  }
+
+  fetchPosts() {
+    request.get(
+      RestApiServer(),
+      {},
+      (err, res) => this.setState({items: res.body})
+    );
   }
 
   like(id) {
@@ -23,8 +36,9 @@ class BlogPage extends React.Component {
     obj.meta.likesCount += 1;
     this.setState({ items });
   }
+
   render() {
-    const {items} = this.props;
+    const {items} = this.state;
     const piechartData = _.map(
       items,
       (item) => [
@@ -39,11 +53,14 @@ class BlogPage extends React.Component {
 }
 
 BlogPage.propTypes = {
-  items: PropTypes.array
+  items: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.object
+  ])
 };
 
 BlogPage.defaultProps = {
-  items: threeItems
+  items: []
 };
 
 export default BlogPage;

@@ -1,21 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {threeItems} from 'components/static/items';
 import { PanelGroup } from 'react-bootstrap';
 import BlogItem from 'components/ui/BlogItem';
-import _ from 'lodash';
+import request from 'superagent';
+import { postsPath, RestApiServer } from 'components/helpers/routes';
 
-const findItem = function(id) {
-  return _.find(threeItems, ['id', id]);
-};
+class Post extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {post: null};
+  }
 
-const Post = ({params}) => (
-  <PanelGroup>
-    <BlogItem image={findItem(params.id).image}
-      meta={findItem(params.id).meta}
-      text={findItem(params.id).text} />
-  </PanelGroup>
-);
+  componentWillMount() {
+    this.requestPost();
+  }
+
+  requestPost() {
+    request.get(
+      `${RestApiServer()}${postsPath(this.props.params.id)}`,
+      {},
+      (err, res) => this.setState({post: res.body})
+    );
+  }
+  render() {
+    const {post} = this.state;
+    let blogItem = <p>Loading Post...</p>;
+    if (post) {
+      blogItem = <BlogItem {...post} />;
+    }
+    return <PanelGroup>{blogItem}</PanelGroup>;
+  }
+}
 
 Post.propTypes = {
   params: PropTypes.object

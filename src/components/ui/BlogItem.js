@@ -32,8 +32,8 @@ class BlogItem extends React.Component {
   }
 }
 BlogItem.propTypes = {
-  image: PropTypes.string,
-  meta: PropTypes.array,
+  image: PropTypes.object,
+  meta: PropTypes.object,
   id: PropTypes.string,
   text: PropTypes.string,
   like: PropTypes.function

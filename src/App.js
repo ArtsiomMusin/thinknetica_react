@@ -6,9 +6,6 @@ import '../node_modules/bootstrap/dist/css/bootstrap.css';
 
 const App = () => (
   <Router history={browserHistory} routes={routes} />
-  // <MainLayout>
-  //   <BlogPage items={threeItems} />
-  // </MainLayout>
 );
 
 export default App;

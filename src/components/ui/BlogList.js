@@ -36,7 +36,10 @@ class BlogList extends React.Component {
 }
 
 BlogList.propTypes = {
-  items: PropTypes.array,
+  items: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.object
+  ]),
   like: PropTypes.function
 };
 

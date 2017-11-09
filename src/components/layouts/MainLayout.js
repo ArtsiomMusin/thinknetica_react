@@ -5,7 +5,7 @@ import { PageHeader, Well } from 'react-bootstrap';
 import Link from 'components/elements/Link';
 
 const MainLayout = ({children}) => (
-  <div class="container">
+  <div className="container">
     <Logo />
     {children}
     <Footer />
