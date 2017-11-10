@@ -1,3 +1,6 @@
+import DOM from 'react-dom-factories';
+import PropTypes from 'prop-types';
+
 const TextBox = ({children}) => (
   DOM.span(null, children)
 );
@@ -7,10 +10,7 @@ TextBox.propTypes = {
 };
 
 TextBox.defaultProps = {
-  text: ""
+  text: ''
 };
 
-ReactDOM.render(
-  React.createElement(TextBox, {}, 'Hey there!'),
-  document.getElementById("textbox")
-);
+export default TextBox;
