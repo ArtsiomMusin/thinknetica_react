@@ -6,11 +6,7 @@ const TextBox = ({children}) => (
 );
 
 TextBox.propTypes = {
-  text: PropTypes.string
-};
-
-TextBox.defaultProps = {
-  text: ''
+  children: PropTypes.node
 };
 
 export default TextBox;

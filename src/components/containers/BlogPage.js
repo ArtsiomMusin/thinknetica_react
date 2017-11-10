@@ -7,7 +7,7 @@ import request from 'superagent';
 import BlogList from '../ui/BlogList';
 import PieChart from '../ui/PieChart';
 import { RestApiServer } from 'components/helpers/routes';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Grid, Row, Col, Form, FormGroup } from 'react-bootstrap';
 
 class BlogPage extends React.Component {
   constructor(props) {
@@ -24,7 +24,10 @@ class BlogPage extends React.Component {
     request.get(
       RestApiServer(),
       {},
-      (err, res) => this.setState({items: res.body})
+      (err, res) => {
+        this.itemsOriginal = res.body;
+        this.setState({items: res.body});
+      }
     );
   }
 
@@ -38,8 +41,17 @@ class BlogPage extends React.Component {
     this.setState({ items });
   }
 
+  search(e) {
+    const filter = RegExp(e.currentTarget.value, 'i');
+    const items = _.filter(this.itemsOriginal, function(o) {
+      return o.text.match(filter);
+    });
+    this.setState({ items });
+  }
+
   render() {
     const {items} = this.state;
+
     const piechartData = _.map(
       items,
       (item) => [
@@ -50,6 +62,16 @@ class BlogPage extends React.Component {
       <Grid>
         <Row className="show-grid">
           <Col sm={6} md={6}>
+            <Form inline>
+              <FormGroup controlId="formInlineName">
+                <span className="glyphicon glyphicon-search" />
+                <input
+                  type="text"
+                  placeholder="Type post name to find"
+                  className="form-control"
+                  onChange={this.search.bind(this)}/>
+              </FormGroup>
+            </Form>
             <BlogList items={items} like={this.like} />
           </Col>
           <Col sm={6} md={6}>

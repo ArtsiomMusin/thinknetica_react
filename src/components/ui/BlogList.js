@@ -19,12 +19,18 @@ class BlogList extends React.Component {
 
   render() {
     const itemsPagination = _.chunk(this.props.items, 3);
-    const list =  _.map(
+    let list =  _.map(
       itemsPagination[this.state.activePage - 1],
       (item, key) => <li key={key}>
         <BlogItem {...item} like={this.props.like} />
       </li>
     );
+    if (_.isEmpty(this.props.items)) {
+      list = <h2>
+        <span className="glyphicon glyphicon-minus-sign" />
+        Sorry...No post found...
+      </h2>;
+    }
 
     return (
       <div>
