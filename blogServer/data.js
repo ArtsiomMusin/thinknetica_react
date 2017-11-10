@@ -35,6 +35,42 @@ module.exports = {
         likesCount: 10
       },
       text: 'Beeball'
+    },
+    {
+      id: '59f72ed596059543b33bb618',
+      image: {},
+      meta: {
+        updated: formatDate('19810320'),
+        likesCount: 35
+      },
+      text: 'One more post 1'
+    },
+    {
+      id: '59f72ed596059543b33bb619',
+      image: {},
+      meta: {
+        updated: formatDate('19810320'),
+        likesCount: 10
+      },
+      text: 'One more post 2'
+    },
+    {
+      id: '59f72ed596059543b33bb620',
+      image: {},
+      meta: {
+        updated: formatDate('19810320'),
+        likesCount: 33
+      },
+      text: 'One more post 3'
+    },
+    {
+      id: '59f72ed596059543b33bb621',
+      image: {},
+      meta: {
+        updated: formatDate('19810320'),
+        likesCount: 1
+      },
+      text: 'One more post 4'
     }
   ]
 };

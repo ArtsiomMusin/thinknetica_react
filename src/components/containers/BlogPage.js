@@ -7,6 +7,7 @@ import request from 'superagent';
 import BlogList from '../ui/BlogList';
 import PieChart from '../ui/PieChart';
 import { RestApiServer } from 'components/helpers/routes';
+import { Grid, Row, Col } from 'react-bootstrap';
 
 class BlogPage extends React.Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class BlogPage extends React.Component {
   }
 
   like(id) {
-    const items = _.assign({}, this.state.items);
+    const items = _.assign([], this.state.items);
     const obj = _.find(items, ['id', id]);
     if (!obj.meta.likesCount) {
       obj.meta.likesCount = 0;
@@ -46,17 +47,22 @@ class BlogPage extends React.Component {
       ]);
     return DOM.div(
       null,
-      React.createElement(BlogList, {items, like: this.like}),
-      <PieChart columns={piechartData}/>
+      <Grid>
+        <Row className="show-grid">
+          <Col sm={6} md={6}>
+            <BlogList items={items} like={this.like} />
+          </Col>
+          <Col sm={6} md={6}>
+            <PieChart columns={piechartData}/>
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }
 
 BlogPage.propTypes = {
-  items: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.object
-  ])
+  items: PropTypes.array
 };
 
 BlogPage.defaultProps = {

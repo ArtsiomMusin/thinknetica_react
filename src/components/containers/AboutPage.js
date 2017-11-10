@@ -1,10 +1,10 @@
 import React from 'react';
 import TextBox from 'components/ui/TextBox';
-import { PanelGroup, Button } from 'react-bootstrap';
+import { Jumbotron, Button } from 'react-bootstrap';
 import history from 'components/helpers/history';
 
 const AboutPage = () => (
-  <PanelGroup>
+  <Jumbotron>
     <div style={{textAlign: 'center'}}>
       <TextBox>
         Sorry this page cannot tell you anything about this blog...
@@ -13,7 +13,7 @@ const AboutPage = () => (
     <div style={{textAlign: 'center'}}>
       <Button onClick={() => history.goBack()}>Get me out of here!</Button>
     </div>
-  </PanelGroup>
+  </Jumbotron>
 );
 
 export default AboutPage;
