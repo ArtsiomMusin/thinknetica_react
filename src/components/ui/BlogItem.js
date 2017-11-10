@@ -17,16 +17,21 @@ class BlogItem extends React.Component {
     const {image, meta, text, id, like} = this.props;
     return DOM.div(
       null,
-      React.createElement(Image, { src: image.src }),
-      <Link to={postsPath(id)}>
-        <TextBox>{text}</TextBox>
-      </Link>,
-      DOM.span(null, `(Written by ${meta.author})`),
-      DOM.div(
-        null,
-        meta.created && DOM.div(null, `Created: ${meta.created}`),
-        meta.updated && DOM.div(null, `Updated: ${meta.updated}`)
-      ),
+      <div>
+        <div style={{float: 'left'}}>
+          <Image  src={image.src} />
+        </div>
+        <div>
+          <Link to={postsPath(id)}>
+            <TextBox>{text}</TextBox>
+          </Link>
+          <h5>Author: {meta.author}</h5>
+          <p>
+            {meta.created && `created: ${meta.created} `}           
+            {meta.updated && `updated: ${meta.updated}`}
+          </p>
+        </div>
+      </div>,
       like && React.createElement(Like, {count: meta.likesCount, like, id})
     );
   }
