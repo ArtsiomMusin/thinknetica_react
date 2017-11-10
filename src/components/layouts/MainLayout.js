@@ -21,6 +21,7 @@ export default MainLayout;
 const Logo = () => (
   <PageHeader>
     <Link to='/'>Thinknetica Blog by Artem</Link>
+    <About />
   </PageHeader>
 );
 
@@ -28,4 +29,12 @@ const Footer = () => (
   <Well>
     Powered by Me 8-)
   </Well>
+);
+
+const About = () => (
+  <div style={{float: 'right'}}>
+    <Link to='/about'>
+      <span className="glyphicon glyphicon-question-sign" />
+    </Link>
+  </div>
 );
