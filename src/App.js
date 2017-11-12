@@ -1,12 +1,9 @@
 import React from 'react';
-import { Router } from 'react-router';
-import history from 'components/helpers/history';
-import routes from 'routes';
-
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 
+import BlogRoutes from 'routes';
 const App = () => (
-  <Router history={history} routes={routes} />
+  <BlogRoutes />
 );
 
 export default App;

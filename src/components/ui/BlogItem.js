@@ -17,7 +17,8 @@ class BlogItem extends React.Component {
     const {image, meta, text, id, like} = this.props;
     return DOM.div(
       null,
-      <div>
+      <div style={{borderBottom: 'solid', borderRadius: '5px',
+        backgroundColor: 'lightgrey'}}>
         <div style={{float: 'left'}}>
           <Image  src={image.src} />
         </div>
@@ -27,12 +28,12 @@ class BlogItem extends React.Component {
           </Link>
           <h5>Author: {meta.author}</h5>
           <p>
-            {meta.created && `created: ${meta.created} `}           
+            {meta.created && `created: ${meta.created} `}
             {meta.updated && `updated: ${meta.updated}`}
           </p>
         </div>
-      </div>,
-      like && React.createElement(Like, {count: meta.likesCount, like, id})
+        {like && <Like count={meta.likesCount} like={like} id={id} />}
+      </div>
     );
   }
 }

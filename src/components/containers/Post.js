@@ -17,7 +17,7 @@ class Post extends React.Component {
 
   requestPost() {
     request.get(
-      `${RestApiServer()}${postsPath(this.props.params.id)}`,
+      `${RestApiServer()}${postsPath(this.props.match.params.id)}`,
       {},
       (err, res) => this.setState({post: res.body})
     );
@@ -33,7 +33,7 @@ class Post extends React.Component {
 }
 
 Post.propTypes = {
-  params: PropTypes.object
+  match: PropTypes.object
 };
 
 export default Post;

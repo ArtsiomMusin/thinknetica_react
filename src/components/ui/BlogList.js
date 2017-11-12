@@ -36,6 +36,7 @@ class BlogList extends React.Component {
       <div>
         <ul>{list}</ul>
         <Pagination
+          style={{justifyContent: 'center', display: 'flex'}}
           bsSize="medium"
           items={itemsPagination.length}
           activePage={this.state.activePage}
