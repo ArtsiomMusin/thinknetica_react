@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { PanelGroup } from 'react-bootstrap';
 import BlogItem from 'components/ui/BlogItem';
-import request from 'superagent';
-import { postsPath, RestApiServer } from 'components/helpers/routes';
 
 class Post extends React.Component {
   constructor(props) {
@@ -11,17 +9,10 @@ class Post extends React.Component {
     this.state = {post: null};
   }
 
-  componentWillMount() {
-    this.requestPost();
+  componentWillReceiveProps(nextProps) {
+    this.setState({ post: nextProps.post});
   }
 
-  requestPost() {
-    request.get(
-      `${RestApiServer()}${postsPath(this.props.match.params.id)}`,
-      {},
-      (err, res) => this.setState({post: res.body})
-    );
-  }
   render() {
     const {post} = this.state;
     let blogItem = <p>Loading Post...</p>;
@@ -33,7 +24,7 @@ class Post extends React.Component {
 }
 
 Post.propTypes = {
-  match: PropTypes.object
+  post: PropTypes.object
 };
 
 export default Post;

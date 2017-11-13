@@ -2,17 +2,28 @@ import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import MainLayout from 'components/layouts/MainLayout';
-import BlogPage from 'components/containers/BlogPage';
+import PostsContainer from 'containers/PostsContainer';
+import PostContainer from 'containers/PostContainer';
 import AboutPage from 'components/containers/AboutPage';
-import Post from 'components/containers/Post';
-import { rootPath, postsPath, aboutPath } from 'components/helpers/routes';
+import { rootPath, postsPath, aboutPath } from 'helpers/routes';
+//import { fetchPosts } from 'actions/Posts';
+import { fetchPost } from 'actions/Post';
 
 const BlogRoutes = () => (
   <BrowserRouter>
     <MainLayout>
-      <Route exact path={rootPath()} component={BlogPage} />
+      <Route
+        exact path={rootPath()}
+        component={PostsContainer}
+      />
       <Route path={aboutPath()} component={AboutPage} />
-      <Route path={postsPath()} component={Post} />
+      <Route
+        path={postsPath()}
+        component={PostContainer}
+        prepareData={(store, query, params) =>
+          store.dispatch(fetchPost(params.id))
+        }
+      />
     </MainLayout>
   </BrowserRouter>
 );

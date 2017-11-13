@@ -6,7 +6,7 @@ import Image from './Image';
 import TextBox from './TextBox';
 import Like from './Like';
 import Link from 'components/elements/Link';
-import { postsPath } from 'components/helpers/routes';
+import { postsPath } from 'helpers/routes';
 
 class BlogItem extends React.Component {
   constructor(props) {

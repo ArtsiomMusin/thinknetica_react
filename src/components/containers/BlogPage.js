@@ -2,11 +2,9 @@ import React from 'react';
 import DOM from 'react-dom-factories';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import request from 'superagent';
 
 import BlogList from '../ui/BlogList';
 import PieChart from '../ui/PieChart';
-import { RestApiServer } from 'components/helpers/routes';
 import { Grid, Row, Col, Form, FormGroup } from 'react-bootstrap';
 
 class BlogPage extends React.Component {
@@ -16,19 +14,8 @@ class BlogPage extends React.Component {
     this.like = _.bind(this.like, this);
   }
 
-  componentDidMount() {
-    this.fetchPosts();
-  }
-
-  fetchPosts() {
-    request.get(
-      RestApiServer(),
-      {},
-      (err, res) => {
-        this.itemsOriginal = res.body;
-        this.setState({items: res.body});
-      }
-    );
+  componentWillReceiveProps(nextProps) {
+    this.setState({ items: nextProps.items});
   }
 
   like(id) {
