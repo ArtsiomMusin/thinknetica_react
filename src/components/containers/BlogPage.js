@@ -49,7 +49,7 @@ class BlogPage extends React.Component {
       <Grid>
         <Row className="show-grid">
           <Col sm={6} md={6}>
-            <Form inline style={{justifyContent: 'center', display: 'flex'}}>
+            <Form inline style={{justifyContent: 'flex-end', display: 'flex'}}>
               <FormGroup controlId="formInlineName">
                 <span className="glyphicon glyphicon-search" />
                 <input

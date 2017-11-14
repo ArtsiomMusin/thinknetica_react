@@ -21,7 +21,7 @@ class BlogList extends React.Component {
     const itemsPagination = _.chunk(this.props.items, 3);
     let list =  _.map(
       itemsPagination[this.state.activePage - 1],
-      (item, key) => <li key={key}>
+      (item, key) => <li className='list-group-item' key={key}>
         <BlogItem {...item} like={this.props.like} />
       </li>
     );
@@ -34,7 +34,7 @@ class BlogList extends React.Component {
 
     return (
       <div>
-        <ul>{list}</ul>
+        <ul className='list-group'>{list}</ul>
         <Pagination
           style={{justifyContent: 'center', display: 'flex'}}
           bsSize="medium"

@@ -20,8 +20,8 @@ Image.propTypes = {
 
 Image.defaultProps = {
   src: 'https://goo.gl/yQ62SX',
-  width: '50',
-  height: '50',
+  width: '150',
+  height: '150',
   alt: ''
 };
 

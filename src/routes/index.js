@@ -8,45 +8,36 @@ import AboutPage from 'components/containers/AboutPage';
 import { rootPath, postsPath, aboutPath } from 'helpers/routes';
 import { fetchPosts } from 'actions/Posts';
 import { fetchPost } from 'actions/Post';
+import { map } from 'lodash/collection';
 
-// const routesConst = {
-//   root: {
-//     exact: true,
-//     path: rootPath(),
-//     prepareData: (store) => store.dispatch(fetchPosts())
-//   }
-// };
+const routesConst = [
+  {
+    exact: true,
+    path: rootPath(),
+    prepareData: (store) => store.dispatch(fetchPosts()),
+    component: PostsContainer
+  },
+  {
+    path: postsPath(),
+    prepareData: (store, query, params) => store.dispatch(fetchPost(params.id)),
+    component: PostContainer
+  },
+  {
+    path: aboutPath(),
+    component: AboutPage
+  }
+];
 
-// <Route
-//   exact path={rootPath()}
-//   component={PostsContainer}
-//   prepareData={(store) =>
-//     store.dispatch(fetchPosts())
-//   }
-// />
-
-//const routes = ;
-
-const BlogRoutes = () => (
+export const BlogRoutes = () => (
   <MainLayout>
     <Switch>
-      <Route
-        exact path={rootPath()}
-        component={PostsContainer}
-        prepareData={(store) =>
-          store.dispatch(fetchPosts())
-        }
-      />
-      <Route path={aboutPath()} component={AboutPage} />
-      <Route
-        path={postsPath()}
-        component={PostContainer}
-        prepareData={(store, query, params) =>
-          store.dispatch(fetchPost(params.id))
-        }
-      />
+      { map(routesConst, route => <Route {...route} />) }
     </Switch>
   </MainLayout>
 );
+
+export function createRoutes() {
+  return routesConst;
+}
 
 export default BlogRoutes;
