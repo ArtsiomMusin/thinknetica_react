@@ -1,20 +1,41 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import MainLayout from 'components/layouts/MainLayout';
 import PostsContainer from 'containers/PostsContainer';
 import PostContainer from 'containers/PostContainer';
 import AboutPage from 'components/containers/AboutPage';
 import { rootPath, postsPath, aboutPath } from 'helpers/routes';
-//import { fetchPosts } from 'actions/Posts';
+import { fetchPosts } from 'actions/Posts';
 import { fetchPost } from 'actions/Post';
 
+// const routesConst = {
+//   root: {
+//     exact: true,
+//     path: rootPath(),
+//     prepareData: (store) => store.dispatch(fetchPosts())
+//   }
+// };
+
+// <Route
+//   exact path={rootPath()}
+//   component={PostsContainer}
+//   prepareData={(store) =>
+//     store.dispatch(fetchPosts())
+//   }
+// />
+
+//const routes = ;
+
 const BlogRoutes = () => (
-  <BrowserRouter>
-    <MainLayout>
+  <MainLayout>
+    <Switch>
       <Route
         exact path={rootPath()}
         component={PostsContainer}
+        prepareData={(store) =>
+          store.dispatch(fetchPosts())
+        }
       />
       <Route path={aboutPath()} component={AboutPage} />
       <Route
@@ -24,8 +45,8 @@ const BlogRoutes = () => (
           store.dispatch(fetchPost(params.id))
         }
       />
-    </MainLayout>
-  </BrowserRouter>
+    </Switch>
+  </MainLayout>
 );
 
 export default BlogRoutes;
