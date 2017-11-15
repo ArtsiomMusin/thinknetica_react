@@ -7,7 +7,9 @@ const Like = ({count, like, id}) => (
   DOM.div(
     null,
     count != 0 && DOM.span(null, `Likes: ${count}`),
-    <Button onClick={() => like(id)}>Like</Button>
+    <Button onClick={() => like(id)}>
+      <span className="glyphicon glyphicon-thumbs-up" />
+    </Button>
   )
 );
 

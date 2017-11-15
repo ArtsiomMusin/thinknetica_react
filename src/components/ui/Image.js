@@ -2,7 +2,7 @@ import DOM from 'react-dom-factories';
 import PropTypes from 'prop-types';
 
 const Image = ({src, width, height, alt}) => (
-  DOM.img({src, width, height, alt})
+  DOM.img({src, width, height, alt, className: 'img-rounded'})
 );
 
 Image.propTypes = {

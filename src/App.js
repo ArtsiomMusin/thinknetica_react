@@ -1,11 +1,9 @@
 import React from 'react';
-import BlogPage from './components/containers/BlogPage';
-import {threeItems} from './components/static/items';
-
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 
+import BlogRoutes from 'routes';
 const App = () => (
-  <BlogPage items={threeItems} />
+  <BlogRoutes />
 );
 
 export default App;

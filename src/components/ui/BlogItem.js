@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import Image from './Image';
 import TextBox from './TextBox';
 import Like from './Like';
+import Link from 'components/elements/Link';
+import { postsPath } from 'components/helpers/routes';
 
 class BlogItem extends React.Component {
   constructor(props) {
@@ -15,21 +17,29 @@ class BlogItem extends React.Component {
     const {image, meta, text, id, like} = this.props;
     return DOM.div(
       null,
-      React.createElement(Image, { src: image.src }),
-      React.createElement(TextBox, {}, text),
-      DOM.span(null, `(Written by ${meta.author})`),
-      DOM.div(
-        null,
-        meta.created && DOM.div(null, `Created: ${meta.created}`),
-        meta.updated && DOM.div(null, `Updated: ${meta.updated}`)
-      ),
-      React.createElement(Like, {count: meta.likesCount, like, id})
+      <div style={{borderBottom: 'solid', borderRadius: '5px',
+        backgroundColor: 'lightgrey'}}>
+        <div style={{float: 'left'}}>
+          <Image  src={image.src} />
+        </div>
+        <div>
+          <Link to={postsPath(id)}>
+            <TextBox>{text}</TextBox>
+          </Link>
+          <h5>Author: {meta.author}</h5>
+          <p>
+            {meta.created && `created: ${meta.created} `}
+            {meta.updated && `updated: ${meta.updated}`}
+          </p>
+        </div>
+        {like && <Like count={meta.likesCount} like={like} id={id} />}
+      </div>
     );
   }
 }
 BlogItem.propTypes = {
-  image: PropTypes.string,
-  meta: PropTypes.array,
+  image: PropTypes.object,
+  meta: PropTypes.object,
   id: PropTypes.string,
   text: PropTypes.string,
   like: PropTypes.function
