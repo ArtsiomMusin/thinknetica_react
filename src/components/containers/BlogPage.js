@@ -3,41 +3,18 @@ import DOM from 'react-dom-factories';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 
-import BlogList from '../ui/BlogList';
+//import BlogList from '../ui/BlogList';
+import BlogListContainer from 'containers/BlogListContainer';
 import PieChart from '../ui/PieChart';
 import { Grid, Row, Col, Form, FormGroup } from 'react-bootstrap';
 
 class BlogPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = props;
-    this.like = _.bind(this.like, this);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({ items: nextProps.items});
-  }
-
-  like(id) {
-    const items = _.assign([], this.state.items);
-    const obj = _.find(items, ['id', id]);
-    if (!obj.meta.likesCount) {
-      obj.meta.likesCount = 0;
-    }
-    obj.meta.likesCount += 1;
-    this.setState({ items });
-  }
-
-  search(e) {
-    const filter = RegExp(e.currentTarget.value, 'i');
-    const items = _.filter(this.itemsOriginal, function(o) {
-      return o.text.match(filter);
-    });
-    this.setState({ items });
   }
 
   render() {
-    const {items} = this.state;
+    const {items} = this.props;
 
     const piechartData = _.map(
       items,
@@ -56,10 +33,10 @@ class BlogPage extends React.Component {
                   type="text"
                   placeholder="Type post name to find"
                   className="form-control"
-                  onChange={this.search.bind(this)}/>
+                  onChange={this.props.search}/>
               </FormGroup>
             </Form>
-            <BlogList items={items} like={this.like} />
+            <BlogListContainer like={this.props.like} />
           </Col>
           <Col sm={6} md={6}>
             <PieChart columns={piechartData}/>
@@ -71,7 +48,9 @@ class BlogPage extends React.Component {
 }
 
 BlogPage.propTypes = {
-  items: PropTypes.array
+  items: PropTypes.array,
+  like: PropTypes.function,
+  search: PropTypes.function
 };
 
 BlogPage.defaultProps = {

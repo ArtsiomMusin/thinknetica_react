@@ -31,7 +31,7 @@ const routesConst = [
 export const BlogRoutes = () => (
   <MainLayout>
     <Switch>
-      { map(routesConst, route => <Route {...route} />) }
+      { map(routesConst, (route, index) => <Route key={index} {...route} />) }
     </Switch>
   </MainLayout>
 );

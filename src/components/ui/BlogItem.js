@@ -61,9 +61,9 @@ BlogItem.propTypes = {
 };
 
 BlogItem.defaultProps = {
-  author: 'Unknown',
-  created: null,
-  updated: null
+  meta: {
+    author: 'Unknown'
+  }
 };
 
 export default BlogItem;
