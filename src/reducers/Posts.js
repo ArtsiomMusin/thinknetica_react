@@ -8,7 +8,7 @@ const initialState = {
 };
 
 function increaseLike(entries, id) {
-  const items = _.assign([], entries);
+  const items = _.values(_.assign({}, entries));
   const obj = _.find(items, ['id', id]);
   obj.meta.likesCount += 1;
   return items;
