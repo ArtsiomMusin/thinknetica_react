@@ -36,9 +36,9 @@ const BlogList = (props) => {
 
 BlogList.propTypes = {
   items: PropTypes.array,
-  like: PropTypes.function,
+  like: PropTypes.func,
   activePage: PropTypes.number,
-  handlePageSelect: PropTypes.function
+  handlePageSelect: PropTypes.func
 };
 
 BlogList.defaultProps = {

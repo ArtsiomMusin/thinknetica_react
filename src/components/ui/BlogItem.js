@@ -57,7 +57,7 @@ BlogItem.propTypes = {
   meta: PropTypes.object,
   id: PropTypes.string,
   text: PropTypes.string,
-  like: PropTypes.function
+  like: PropTypes.func
 };
 
 BlogItem.defaultProps = {

@@ -49,8 +49,8 @@ class BlogPage extends React.Component {
 
 BlogPage.propTypes = {
   items: PropTypes.array,
-  like: PropTypes.function,
-  search: PropTypes.function
+  like: PropTypes.func,
+  search: PropTypes.func
 };
 
 BlogPage.defaultProps = {

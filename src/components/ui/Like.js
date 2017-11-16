@@ -12,7 +12,7 @@ const Like = ({count, like, id}) => (
 
 Like.propTypes = {
   count: PropTypes.number,
-  like: PropTypes.function,
+  like: PropTypes.func,
   id: PropTypes.string
 };
 
