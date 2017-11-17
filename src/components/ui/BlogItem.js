@@ -1,10 +1,9 @@
 import React from 'react';
-import DOM from 'react-dom-factories';
 import PropTypes from 'prop-types';
 
-import Image from './Image';
-import TextBox from './TextBox';
-import Like from './Like';
+import Image from 'components/ui/Image';
+import TextBox from 'components/ui/TextBox';
+import LikeContainer from 'containers/LikeContainer';
 import Link from 'components/elements/Link';
 import { postsPath } from 'helpers/routes';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
@@ -24,8 +23,7 @@ class BlogItem extends React.Component {
 
   render() {
     const {image, meta, text, id, like} = this.props;
-    return DOM.div(
-      null,
+    return (
       <div>
         <div style={{display: 'inline-block'}}>
           <Image src={image.src} />
@@ -38,7 +36,9 @@ class BlogItem extends React.Component {
             <h5><span className="glyphicon glyphicon-user"/> {meta.author}</h5>
             <div>
               <div>
-                {like && <Like count={meta.likesCount} like={like} id={id} />}
+                { like &&
+                  <LikeContainer count={meta.likesCount} id={id} />
+                }
               </div>
               <div>
                 <OverlayTrigger placement="right" overlay={this.tooltip(meta)}>

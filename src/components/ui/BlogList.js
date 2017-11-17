@@ -6,18 +6,19 @@ import { Pagination } from 'react-bootstrap';
 import BlogItem from './BlogItem';
 
 const BlogList = (props) => {
-  const itemsPagination = _.chunk(props.items, 3);
-  let list =  _.map(
-    itemsPagination[props.activePage - 1],
-    (item, key) => <li className='list-group-item' key={key}>
-      <BlogItem {...item} like={props.like} />
-    </li>
-  );
+  let list = null;
   if (_.isEmpty(props.items)) {
     list = <h2>
       <span className="glyphicon glyphicon-minus-sign" />
       Sorry...No post found...
     </h2>;
+  } else {
+    list =  _.map(
+      props.items,
+      (item, key) => <li className='list-group-item' key={key}>
+        <BlogItem {...item} />
+      </li>
+    );
   }
 
   return (
@@ -26,7 +27,7 @@ const BlogList = (props) => {
       <Pagination
         style={{justifyContent: 'center', display: 'flex'}}
         bsSize="medium"
-        items={itemsPagination.length}
+        items={props.itemsPagination.length}
         activePage={props.activePage}
         onSelect={props.handlePageSelect}
       />
@@ -36,9 +37,9 @@ const BlogList = (props) => {
 
 BlogList.propTypes = {
   items: PropTypes.array,
-  like: PropTypes.func,
   activePage: PropTypes.number,
-  handlePageSelect: PropTypes.func
+  handlePageSelect: PropTypes.func,
+  itemsPagination: PropTypes.array
 };
 
 BlogList.defaultProps = {

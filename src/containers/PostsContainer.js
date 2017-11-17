@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import BlogPage from 'components/containers/BlogPage';
-import { addLike, searchPosts } from 'actions/Posts';
 
 const stateToProps = (state) => (
   {
@@ -10,15 +9,4 @@ const stateToProps = (state) => (
   }
 );
 
-const mapDispatchToProps = (dispatch) => (
-  {
-    like: (id) => {
-      dispatch(addLike(id));
-    },
-    search: (name) => {
-      dispatch(searchPosts(name));
-    }
-  }
-);
-
-export default connect(stateToProps, mapDispatchToProps)(BlogPage);
+export default connect(stateToProps)(BlogPage);

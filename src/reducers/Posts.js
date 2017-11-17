@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import * as types from 'constants/actionTypes/postsActionTypes';
+import * as likeTypes from 'constants/actionTypes/likeActionTypes';
 
 const initialState = {
   isFetching: false,
@@ -38,7 +39,7 @@ export default function(state = initialState, action) {
           entriesOriginal: action.response
         }
       );
-    case types.INCREASE_LIKE_COUNT:
+    case likeTypes.INCREASE_LIKE_COUNT:
       return _.assign(
         {},
         state,
