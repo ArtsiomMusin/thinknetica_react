@@ -15,8 +15,8 @@ function increaseLike(entries, id) {
   return items;
 }
 
-function findPosts(entries, name) {
-  const filter = RegExp(name.currentTarget.value, 'i');
+function findPosts(entries, event) {
+  const filter = RegExp(event.currentTarget.value, 'i');
   const items = _.filter(entries, function(o) {
     return o.text.match(filter);
   });
@@ -49,7 +49,7 @@ export default function(state = initialState, action) {
       return _.assign(
         {},
         state,
-        { entries: findPosts(state.entriesOriginal, action.name) }
+        { entries: findPosts(state.entriesOriginal, action.event) }
       );
     default:
       return state;

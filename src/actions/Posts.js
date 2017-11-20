@@ -15,9 +15,9 @@ const errorPosts = () => ({
   type: types.FETCH_POSTS_ERROR
 });
 
-const findPosts = (name) => ({
+const findPosts = (event) => ({
   type: types.FIND_POSTS_BY_NAME,
-  name
+  event
 });
 
 export function fetchPosts() {
@@ -32,8 +32,8 @@ export function fetchPosts() {
   };
 }
 
-export function searchPosts(name) {
+export function searchPosts(event) {
   return (dispatch) => {
-    dispatch(findPosts(name));
+    dispatch(findPosts(event));
   };
 }

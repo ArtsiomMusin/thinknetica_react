@@ -4,8 +4,8 @@ import { searchPosts } from 'actions/Posts';
 
 const mapDispatchToProps = (dispatch) => (
   {
-    search: (id) => {
-      dispatch(searchPosts(id));
+    search: (event) => {
+      dispatch(searchPosts(event));
     }
   }
 );

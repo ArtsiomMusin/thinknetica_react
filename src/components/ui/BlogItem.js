@@ -22,7 +22,7 @@ class BlogItem extends React.Component {
   }
 
   render() {
-    const {image, meta, text, id, like} = this.props;
+    const {image, meta, text, id} = this.props;
     return (
       <div>
         <div style={{display: 'inline-block'}}>
@@ -36,9 +36,7 @@ class BlogItem extends React.Component {
             <h5><span className="glyphicon glyphicon-user"/> {meta.author}</h5>
             <div>
               <div>
-                { like &&
-                  <LikeContainer count={meta.likesCount} id={id} />
-                }
+                <LikeContainer count={meta.likesCount} id={id} />
               </div>
               <div>
                 <OverlayTrigger placement="right" overlay={this.tooltip(meta)}>
@@ -56,8 +54,7 @@ BlogItem.propTypes = {
   image: PropTypes.object,
   meta: PropTypes.object,
   id: PropTypes.string,
-  text: PropTypes.string,
-  like: PropTypes.func
+  text: PropTypes.string
 };
 
 BlogItem.defaultProps = {
