@@ -39,7 +39,6 @@ PieChart.propTypes = {
 
 
 PieChart.defaultProps = {
-  columns: [['data1', 30], ['data2', 50]],
   type: 'pie'
 };
 

@@ -1,20 +1,43 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import MainLayout from 'components/layouts/MainLayout';
-import BlogPage from 'components/containers/BlogPage';
+import PostsContainer from 'containers/PostsContainer';
+import PostContainer from 'containers/PostContainer';
 import AboutPage from 'components/containers/AboutPage';
-import Post from 'components/containers/Post';
-import { rootPath, postsPath, aboutPath } from 'components/helpers/routes';
+import { rootPath, postsPath, aboutPath } from 'helpers/routes';
+import { fetchPosts } from 'actions/Posts';
+import { fetchPost } from 'actions/Post';
+import { map } from 'lodash/collection';
 
-const BlogRoutes = () => (
-  <BrowserRouter>
-    <MainLayout>
-      <Route exact path={rootPath()} component={BlogPage} />
-      <Route path={aboutPath()} component={AboutPage} />
-      <Route path={postsPath()} component={Post} />
-    </MainLayout>
-  </BrowserRouter>
+const routesConst = [
+  {
+    exact: true,
+    path: rootPath(),
+    prepareData: (store) => store.dispatch(fetchPosts()),
+    component: PostsContainer
+  },
+  {
+    path: postsPath(),
+    prepareData: (store, query, params) => store.dispatch(fetchPost(params.id)),
+    component: PostContainer
+  },
+  {
+    path: aboutPath(),
+    component: AboutPage
+  }
+];
+
+export const BlogRoutes = () => (
+  <MainLayout>
+    <Switch>
+      { map(routesConst, (route, index) => <Route key={index} {...route} />) }
+    </Switch>
+  </MainLayout>
 );
+
+export function createRoutes() {
+  return routesConst;
+}
 
 export default BlogRoutes;

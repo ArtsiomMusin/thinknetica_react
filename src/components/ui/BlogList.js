@@ -5,55 +5,46 @@ import { Pagination } from 'react-bootstrap';
 
 import BlogItem from './BlogItem';
 
-class BlogList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { activePage: 1};
-  }
-
-  handlePageSelect(eventKey) {
-    this.setState({
-      activePage: eventKey
-    });
-  }
-
-  render() {
-    const itemsPagination = _.chunk(this.props.items, 3);
-    let list =  _.map(
-      itemsPagination[this.state.activePage - 1],
-      (item, key) => <li key={key}>
-        <BlogItem {...item} like={this.props.like} />
+const BlogList = (props) => {
+  let list = null;
+  if (_.isEmpty(props.items)) {
+    list = <h2>
+      <span className="glyphicon glyphicon-minus-sign" />
+      Sorry...No post found...
+    </h2>;
+  } else {
+    list =  _.map(
+      props.items,
+      (item, key) => <li className='list-group-item' key={key}>
+        <BlogItem {...item} />
       </li>
     );
-    if (_.isEmpty(this.props.items)) {
-      list = <h2>
-        <span className="glyphicon glyphicon-minus-sign" />
-        Sorry...No post found...
-      </h2>;
-    }
-
-    return (
-      <div>
-        <ul>{list}</ul>
-        <Pagination
-          style={{justifyContent: 'center', display: 'flex'}}
-          bsSize="medium"
-          items={itemsPagination.length}
-          activePage={this.state.activePage}
-          onSelect={this.handlePageSelect.bind(this)}
-        />
-      </div>
-    );
   }
-}
+
+  return (
+    <div>
+      <ul className='list-group'>{list}</ul>
+      <Pagination
+        style={{justifyContent: 'center', display: 'flex'}}
+        bsSize="medium"
+        items={props.itemsPagination.length}
+        activePage={props.activePage}
+        onSelect={props.handlePageSelect}
+      />
+    </div>
+  );
+};
 
 BlogList.propTypes = {
   items: PropTypes.array,
-  like: PropTypes.function
+  activePage: PropTypes.number,
+  handlePageSelect: PropTypes.func,
+  itemsPagination: PropTypes.array
 };
 
 BlogList.defaultProps = {
-  items: []
+  items: [],
+  activePage: 1
 };
 
 export default BlogList;
