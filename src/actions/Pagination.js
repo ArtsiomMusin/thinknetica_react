@@ -1,12 +1,13 @@
 import * as types from 'constants/actionTypes/paginationActionTypes';
-
-const activePage = (activePage) => ({
-  type: types.SET_ACTIVE_PAGE,
-  activePage
-});
+import { PAGINATION } from 'middleware/Pagination';
 
 export function setActivePage(eventKey) {
-  return (dispatch) => {
-    dispatch(activePage(eventKey));
+  return {
+    [PAGINATION]: {
+      activePage: eventKey,
+      types: [
+        types.SET_ACTIVE_PAGE,
+      ]
+    }
   };
 }

@@ -32,7 +32,7 @@ app.get('/posts/:id', function(req, res) {
 app.post('/', function (req, res) {
   const obj = _.find(items, ['id', req.query['id']]);
   obj.meta.likesCount += 1;
-  res.send(items);
+  res.send(obj);
 });
 
 app.listen(3001, function() {

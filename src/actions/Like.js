@@ -1,4 +1,4 @@
-import * as types from 'constants/actionTypes/postsActionTypes';
+import * as types from 'constants/actionTypes/likeActionTypes';
 import { API_CALL } from 'middleware/API';
 
 export function addLike(id) {
@@ -8,9 +8,9 @@ export function addLike(id) {
       method: 'POST',
       query: { id },
       types: [
-        types.FETCH_POSTS_REQUEST,
-        types.FETCH_POSTS_SUCCESS,
-        types.FETCH_POSTS_ERROR
+        types.UPDATE_LIKE_REQUEST,
+        types.UPDATE_LIKE_SUCCESS,
+        types.UPDATE_LIKE_ERROR
       ]
     }
   };
