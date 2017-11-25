@@ -9,20 +9,31 @@ const _ = require('lodash');
 
 app.use(cors());
 
+function filterItems(items, name) {
+  if (!name) {
+    return items;
+  }
+  const filter = RegExp(name, 'i');
+  return _.filter(items, function(o) {
+    return o.text.match(filter);
+  });
+}
+
+function itemsPerPage(items, page) {
+  if (!page) {
+    return items;
+  }
+  const itemsPagination = _.chunk(items, 3);
+  return itemsPagination[page - 1];
+}
+
 app.get('/', function(req, res) {
-  const query = req.query;
-  var itemToReturn = items;
-  if (query['name']) {
-    const filter = RegExp(query['name'], 'i');
-    itemToReturn = _.filter(itemToReturn, function(o) {
-      return o.text.match(filter);
-    });
-  }
-  if (query['page']) {
-    const itemsPagination = _.chunk(itemToReturn, 3);
-    itemToReturn = itemsPagination[query['page'] - 1];
-  }
-  res.json(itemToReturn);
+  const {name, page} = req.query;
+  let itemsToReturn = items;
+  itemsToReturn = filterItems(itemsToReturn, name);
+  itemsToReturn = itemsPerPage(itemsToReturn, page);
+
+  res.json(itemsToReturn);
 });
 
 app.get('/posts/:id', function(req, res) {

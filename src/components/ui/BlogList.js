@@ -39,7 +39,7 @@ BlogList.propTypes = {
   items: PropTypes.array,
   activePage: PropTypes.number,
   handlePageSelect: PropTypes.func,
-  itemsPagination: PropTypes.array
+  itemsPagination: PropTypes.number
 };
 
 BlogList.defaultProps = {
