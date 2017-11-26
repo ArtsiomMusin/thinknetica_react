@@ -14,12 +14,16 @@ const routesConst = [
   {
     exact: true,
     path: rootPath(),
-    prepareData: (store) => store.dispatch(fetchPosts()),
-    component: PostsContainer
+    prepareData: (store) => {
+      return store.dispatch(fetchPosts());
+    },
+    componeprepareDatant: PostsContainer
   },
   {
     path: postsPath(),
-    prepareData: (store, query, params) => store.dispatch(fetchPost(params.id)),
+    prepareData: (store, query, params) => {
+      return store.dispatch(fetchPost(params.id));
+    },
     component: PostContainer
   },
   {

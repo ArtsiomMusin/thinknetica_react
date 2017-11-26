@@ -1,7 +1,8 @@
 import React from 'react';
 import TextBox from 'components/ui/TextBox';
 import { Jumbotron, Button } from 'react-bootstrap';
-import history from 'helpers/history';
+// TODO: fix this 
+//import history from 'helpers/history';
 
 const AboutPage = () => (
   <Jumbotron>
