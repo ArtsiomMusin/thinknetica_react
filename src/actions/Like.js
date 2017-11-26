@@ -1,12 +1,17 @@
 import * as types from 'constants/actionTypes/likeActionTypes';
-
-const increaseLikes = (id) => ({
-  type: types.INCREASE_LIKE_COUNT,
-  id
-});
+import { API_CALL } from 'middleware/API';
 
 export function addLike(id) {
-  return (dispatch) => {
-    dispatch(increaseLikes(id));
+  return {
+    [API_CALL]: {
+      endpoint: '/',
+      method: 'POST',
+      query: { id },
+      types: [
+        types.UPDATE_LIKE_REQUEST,
+        types.UPDATE_LIKE_SUCCESS,
+        types.UPDATE_LIKE_ERROR
+      ]
+    }
   };
 }

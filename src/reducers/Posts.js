@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { assign, isEmpty, values, find } from 'lodash';
 import * as types from 'constants/actionTypes/postsActionTypes';
 import * as likeTypes from 'constants/actionTypes/likeActionTypes';
 
@@ -8,48 +8,37 @@ const initialState = {
   entries: []
 };
 
-function increaseLike(entries, id) {
-  const items = _.values(_.assign({}, entries));
-  const obj = _.find(items, ['id', id]);
-  obj.meta.likesCount += 1;
+function increaseLike(entries, object) {
+  const items = values(assign({}, entries));
+  const obj = find(items, ['id', object.id]);
+  obj.meta.likesCount = object.meta.likesCount;
   return items;
 }
 
-function findPosts(entries, event) {
-  const filter = RegExp(event.currentTarget.value, 'i');
-  const items = _.filter(entries, function(o) {
-    return o.text.match(filter);
-  });
-
-  return items;
-}
+const getCurrentState = (state) => {
+  if (isEmpty(state.entries)) {
+    return initialState;
+  }
+  return state;
+};
 
 export default function(state = initialState, action) {
   switch (action.type) {
     case types.FETCH_POSTS_REQUEST:
-      return _.assign({}, initialState, { isFetching: true });
+      return assign({}, getCurrentState(state), { isFetching: true });
     case types.FETCH_POSTS_ERROR:
-      return _.assign({}, initialState, { error: true });
+      return assign({}, initialState, { error: true });
     case types.FETCH_POSTS_SUCCESS:
-      return _.assign(
+      return assign(
         {},
         initialState,
-        {
-          entries: action.response,
-          entriesOriginal: action.response
-        }
+        { entries: action.response }
       );
-    case likeTypes.INCREASE_LIKE_COUNT:
-      return _.assign(
+    case likeTypes.UPDATE_LIKE_SUCCESS:
+      return assign(
         {},
         state,
-        { entries: increaseLike(state.entries, action.id) }
-      );
-    case types.FIND_POSTS_BY_NAME:
-      return _.assign(
-        {},
-        state,
-        { entries: findPosts(state.entriesOriginal, action.event) }
+        { entries: increaseLike(state.entries, action.response) }
       );
     default:
       return state;

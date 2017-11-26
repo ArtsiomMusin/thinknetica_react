@@ -27,7 +27,7 @@ const BlogList = (props) => {
       <Pagination
         style={{justifyContent: 'center', display: 'flex'}}
         bsSize="medium"
-        items={props.itemsPagination.length}
+        items={props.itemsPagination}
         activePage={props.activePage}
         onSelect={props.handlePageSelect}
       />
@@ -39,7 +39,7 @@ BlogList.propTypes = {
   items: PropTypes.array,
   activePage: PropTypes.number,
   handlePageSelect: PropTypes.func,
-  itemsPagination: PropTypes.array
+  itemsPagination: PropTypes.number
 };
 
 BlogList.defaultProps = {

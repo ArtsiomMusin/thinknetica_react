@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import PostsSearch from 'components/elements/PostsSearch';
-import { searchPosts } from 'actions/Posts';
+import { fetchPosts } from 'actions/Posts';
 
 const mapDispatchToProps = (dispatch) => (
   {
     search: (event) => {
-      dispatch(searchPosts(event));
+      dispatch(fetchPosts(event.currentTarget.value));
     }
   }
 );
