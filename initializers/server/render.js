@@ -14,14 +14,14 @@ const routes = createRoutes();
 export default (req, res) => {
   routes.some(route => {
     const state = { params: {}, routes: [] };
-
     const match = matchPath(req.url, route);
+    
     if (match)
     {
       state.routes.push(route);
       assign(state.params, match.params);
       assign(state.query, parse(req.url.substr(1)));
-      Promise.all(prepareData(store, state)).then(() => {
+      Promise.all(compact(prepareData(store, state))).then(() => {
         const initialState = JSON.stringify(store.getState());
 
         const content = ReacDOMServer.renderToString(

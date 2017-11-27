@@ -10,15 +10,16 @@ import { fetchPosts } from 'actions/Posts';
 import { fetchPost } from 'actions/Post';
 import { map } from 'lodash/collection';
 import initialLoad from 'helpers/initialLoad';
+
 const routesConst = [
   {
-    exact: true,
     path: rootPath(),
+    exact: true,
     prepareData: (store) => {
       if (initialLoad()) return;
       return store.dispatch(fetchPosts());
     },
-    componeprepareDatant: PostsContainer
+    component: PostsContainer
   },
   {
     path: postsPath(),
