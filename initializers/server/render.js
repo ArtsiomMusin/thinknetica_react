@@ -1,14 +1,15 @@
 import React from 'react';
 import ReacDOMServer from 'react-dom/server';
-import Provider from 'react-redux';
-import { matchPath, RouterContext } from 'react-router';
+import { Provider } from 'react-redux';
+import { matchPath, StaticRouter } from 'react-router';
 import { parse } from 'qs';
 import { assign, compact } from 'lodash';
 
-import { createRoutes} from 'routes';
-import store from 'store';
+import { BlogRoutes, createRoutes } from 'routes';
+import createStore from 'store';
 import prepareData from 'helpers/prepareData';
 
+const store = createStore();
 const routes = createRoutes();
 export default (req, res) => {
   routes.some(route => {
@@ -20,12 +21,21 @@ export default (req, res) => {
       state.routes.push(route);
       assign(state.params, match.params);
       assign(state.query, parse(req.url.substr(1)));
-      Promise.all(compact(prepareData(store, state))).then(() => {
+      Promise.all(prepareData(store, state)).then(() => {
         const initialState = JSON.stringify(store.getState());
+
+        const content = ReacDOMServer.renderToString(
+          <Provider store={store}>
+            <StaticRouter location={req.url} context={state}>
+              <BlogRoutes />
+            </StaticRouter>
+          </Provider>
+        );
+
         res.status(200);
         res.render(
           'index',
-          { initialState }
+          { initialState, content }
         );
       });
     }

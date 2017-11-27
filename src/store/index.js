@@ -4,8 +4,9 @@ import PageMiddleware from 'middleware/Pagination';
 import reducers from 'reducers';
 //import DevTools from 'containers/DevTools';
 
-const store = createStore(
+const store = (initialState) => createStore(
   reducers,
+  initialState,
   compose(
     applyMiddleware(APIMiddleware),
     applyMiddleware(PageMiddleware)

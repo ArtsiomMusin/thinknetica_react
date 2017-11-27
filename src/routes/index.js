@@ -9,12 +9,13 @@ import { rootPath, postsPath, aboutPath } from 'helpers/routes';
 import { fetchPosts } from 'actions/Posts';
 import { fetchPost } from 'actions/Post';
 import { map } from 'lodash/collection';
-
+import initialLoad from 'helpers/initialLoad';
 const routesConst = [
   {
     exact: true,
     path: rootPath(),
     prepareData: (store) => {
+      if (initialLoad()) return;
       return store.dispatch(fetchPosts());
     },
     componeprepareDatant: PostsContainer
@@ -22,6 +23,7 @@ const routesConst = [
   {
     path: postsPath(),
     prepareData: (store, query, params) => {
+      if (initialLoad()) return;
       return store.dispatch(fetchPost(params.id));
     },
     component: PostContainer

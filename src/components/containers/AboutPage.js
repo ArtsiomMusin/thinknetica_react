@@ -1,8 +1,7 @@
 import React from 'react';
 import TextBox from 'components/ui/TextBox';
 import { Jumbotron, Button } from 'react-bootstrap';
-// TODO: fix this 
-//import history from 'helpers/history';
+import createHistory from 'history/createBrowserHistory';
 
 const AboutPage = () => (
   <Jumbotron>
@@ -12,7 +11,9 @@ const AboutPage = () => (
       </TextBox>
     </div>
     <div style={{textAlign: 'center'}}>
-      <Button onClick={() => history.goBack()}>Get me out of here!</Button>
+      <Button onClick={() => createHistory().goBack()}>
+        Get me out of here!
+      </Button>
     </div>
   </Jumbotron>
 );
