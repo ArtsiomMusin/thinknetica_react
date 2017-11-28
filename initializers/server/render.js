@@ -9,13 +9,15 @@ import { BlogRoutes, createRoutes } from 'routes';
 import createStore from 'store';
 import prepareData from 'helpers/prepareData';
 
+import Helmet from 'react-helmet';
+
 const store = createStore();
 const routes = createRoutes();
 export default (req, res) => {
-  routes.some(route => {
+  const found = routes.some(route => {
     const state = { params: {}, routes: [] };
     const match = matchPath(req.url, route);
-    
+
     if (match)
     {
       state.routes.push(route);
@@ -32,13 +34,22 @@ export default (req, res) => {
           </Provider>
         );
 
+        const head = Helmet.rewind();
+
         res.status(200);
         res.render(
           'index',
-          { initialState, content }
+          { initialState, content, head }
         );
-      });
+      })
+        .catch (() => {
+          res.status(500).sendFile('500.html', {root: 'src/components/views/'});
+        });
+      return match;
     }
-    return match;
   });
+
+  if (!found) {
+    res.status(404).sendFile('404.html', {root: 'src/components/views/'});
+  }
 };

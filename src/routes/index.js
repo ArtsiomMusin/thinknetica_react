@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import MainLayout from 'components/layouts/MainLayout';
 import PostsContainer from 'containers/PostsContainer';
 import PostContainer from 'containers/PostContainer';
-import AboutPage from 'components/containers/AboutPage';
+import About from 'components/views/About';
 import { rootPath, postsPath, aboutPath } from 'helpers/routes';
 import { fetchPosts } from 'actions/Posts';
 import { fetchPost } from 'actions/Post';
@@ -31,7 +31,7 @@ const routesConst = [
   },
   {
     path: aboutPath(),
-    component: AboutPage
+    component: About
   }
 ];
 

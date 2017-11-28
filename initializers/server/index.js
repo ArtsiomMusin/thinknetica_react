@@ -32,6 +32,9 @@ application.use(
 );
 application.use(webpackHot(compiler));
 
+const morgan = require('morgan');
+application.use(morgan('common'));
+
 application.get('*', require('./render').default);
 
 application.listen(port, function() {
