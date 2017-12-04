@@ -5,7 +5,8 @@ import MainLayout from 'components/layouts/MainLayout';
 import PostsContainer from 'containers/PostsContainer';
 import PostContainer from 'containers/PostContainer';
 import About from 'components/views/About';
-import { rootPath, postsPath, aboutPath } from 'helpers/routes';
+import ContactUs from 'components/views/ContactUs';
+import { rootPath, postsPath, aboutPath, contactUs } from 'helpers/routes';
 import { fetchPosts } from 'actions/Posts';
 import { fetchPost } from 'actions/Post';
 import { map } from 'lodash/collection';
@@ -32,6 +33,10 @@ const routesConst = [
   {
     path: aboutPath(),
     component: About
+  },
+  {
+    path: contactUs(),
+    component: ContactUs
   }
 ];
 
