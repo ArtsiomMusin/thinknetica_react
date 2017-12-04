@@ -1,4 +1,7 @@
 import createHistory from 'history/createBrowserHistory';
-const history = createHistory();
 
+let history = null;
+if (__SERVER__ === false) {
+  history = createHistory();
+}
 export default history;

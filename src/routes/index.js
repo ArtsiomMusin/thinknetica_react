@@ -4,27 +4,34 @@ import { Route, Switch } from 'react-router-dom';
 import MainLayout from 'components/layouts/MainLayout';
 import PostsContainer from 'containers/PostsContainer';
 import PostContainer from 'containers/PostContainer';
-import AboutPage from 'components/containers/AboutPage';
+import About from 'components/views/About';
 import { rootPath, postsPath, aboutPath } from 'helpers/routes';
 import { fetchPosts } from 'actions/Posts';
 import { fetchPost } from 'actions/Post';
 import { map } from 'lodash/collection';
+import initialLoad from 'helpers/initialLoad';
 
 const routesConst = [
   {
-    exact: true,
     path: rootPath(),
-    prepareData: (store) => store.dispatch(fetchPosts()),
+    exact: true,
+    prepareData: (store) => {
+      if (initialLoad()) return;
+      return store.dispatch(fetchPosts());
+    },
     component: PostsContainer
   },
   {
     path: postsPath(),
-    prepareData: (store, query, params) => store.dispatch(fetchPost(params.id)),
+    prepareData: (store, query, params) => {
+      if (initialLoad()) return;
+      return store.dispatch(fetchPost(params.id));
+    },
     component: PostContainer
   },
   {
     path: aboutPath(),
-    component: AboutPage
+    component: About
   }
 ];
 

@@ -11,7 +11,9 @@ const AboutPage = () => (
       </TextBox>
     </div>
     <div style={{textAlign: 'center'}}>
-      <Button onClick={() => history.goBack()}>Get me out of here!</Button>
+      <Button onClick={() => history.goBack()}>
+        Get me out of here!
+      </Button>
     </div>
   </Jumbotron>
 );

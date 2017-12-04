@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import BlogPage from 'components/containers/BlogPage';
+import Index from 'components/views/Index';
 
 const stateToProps = (state) => (
   {
@@ -9,4 +9,4 @@ const stateToProps = (state) => (
   }
 );
 
-export default connect(stateToProps)(BlogPage);
+export default connect(stateToProps)(Index);
