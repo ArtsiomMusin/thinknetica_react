@@ -1,7 +1,7 @@
 import React from 'react';
 import { set, assign } from 'lodash/object';
-import classNames from 'classnames';
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 class ContactUsPage extends React.Component {
   constructor(props) {
@@ -127,6 +127,14 @@ const Text = ({ name, value, onChange, label, error}) => (
   </FormGroup>
 );
 
+Text.propTypes = {
+  name: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  label: PropTypes.string,
+  error: PropTypes.boolean
+};
+
 const TextArea = ({ name, value, onChange, label, error}) => (
   <FormGroup validationState={error ? 'error' : 'success'}>
     <ControlLabel>{label}</ControlLabel>
@@ -140,3 +148,11 @@ const TextArea = ({ name, value, onChange, label, error}) => (
     />
   </FormGroup>
 );
+
+TextArea.propTypes = {
+  name: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  label: PropTypes.string,
+  error: PropTypes.boolean
+};

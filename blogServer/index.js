@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -7,6 +8,7 @@ const cors = require('cors');
 const items = require('./data.js').items;
 const _ = require('lodash');
 
+app.use(bodyParser.json());
 app.use(cors());
 
 function filterItems(items, name) {
@@ -43,6 +45,15 @@ app.get('/posts/:id', function(req, res) {
 app.post('/', function (req, res) {
   const obj = _.find(items, ['id', req.query['id']]);
   obj.meta.likesCount += 1;
+  res.send(obj);
+});
+
+app.put('/posts/:id/edit', function (req, res) {
+  const updatedPost = req.body;
+  const obj = _.find(items, ['id', updatedPost.id]);
+  obj.meta.author = updatedPost.author;
+  obj.meta.created = updatedPost.created;
+  obj.text = updatedPost.title;
   res.send(obj);
 });
 

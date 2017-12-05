@@ -4,9 +4,12 @@ import { Route, Switch } from 'react-router-dom';
 import MainLayout from 'components/layouts/MainLayout';
 import PostsContainer from 'containers/PostsContainer';
 import PostContainer from 'containers/PostContainer';
+//import PostEditContainer from 'containers/PostEditContainer';
 import About from 'components/views/About';
 import ContactUs from 'components/views/ContactUs';
-import { rootPath, postsPath, aboutPath, contactUs } from 'helpers/routes';
+import PostEdit from 'components/views/PostEdit';
+import { rootPath, postsPath, aboutPath,
+  contactUs, postEditPath } from 'helpers/routes';
 import { fetchPosts } from 'actions/Posts';
 import { fetchPost } from 'actions/Post';
 import { map } from 'lodash/collection';
@@ -24,11 +27,22 @@ const routesConst = [
   },
   {
     path: postsPath(),
+    exact: true,
     prepareData: (store, query, params) => {
       if (initialLoad()) return;
       return store.dispatch(fetchPost(params.id));
     },
     component: PostContainer
+  },
+  {
+    path: postEditPath(),
+    exact: true,
+    prepareData: (store, query, params) => {
+      if (initialLoad()) return;
+      console.log("PRAMMMM", params.id);
+      return store.dispatch(fetchPost(params.id));
+    },
+    component: PostEdit
   },
   {
     path: aboutPath(),

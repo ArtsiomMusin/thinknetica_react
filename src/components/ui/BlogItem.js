@@ -5,7 +5,7 @@ import Image from 'components/ui/Image';
 import TextBox from 'components/ui/TextBox';
 import LikeContainer from 'containers/LikeContainer';
 import Link from 'components/elements/Link';
-import { postsPath } from 'helpers/routes';
+import { postsPath, postEditPath } from 'helpers/routes';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 
 class BlogItem extends React.Component {
@@ -44,6 +44,14 @@ class BlogItem extends React.Component {
                 </OverlayTrigger>
               </div>
             </div>
+            <h5>
+              <Link to={postEditPath(id)}>
+                <span
+                  style={{fontSize: '24px'}}
+                  className="glyphicon glyphicon-edit"
+                />
+              </Link>
+            </h5>
           </div>
         </div>
       </div>
