@@ -28,7 +28,7 @@ const nextAction = (action, data) => (
 );
 
 export default store => next => action => {
-  console.log("ACTION", action);
+  //console.log("ACTION", action);
   if (!action[API_CALL]) {
     return next(action);
   }

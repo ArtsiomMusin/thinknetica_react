@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import { updatePost } from 'actions/PostEdit';
 import { FormGroup, ControlLabel, Button } from 'react-bootstrap';
+import history from 'helpers/history';
 
 const PostEdit = ({ handleSubmit }) => (
   <FormGroup>
@@ -48,20 +49,19 @@ PostEdit.propTypes = {
 };
 
 export default connect(
-  (state) => {
-    console.log("STATE", state);
-    return {
-      initialValues: {
-        title: get(state, 'post.entry.text'),
-        created: get(state, 'post.entry.meta.created'),
-        author: get(state, 'post.entry.meta.author'),
-        id: get(state, 'post.entry.id')
-      }
-    };}
+  (state) => ({
+    initialValues: {
+      title: get(state, 'post.entry.text'),
+      created: get(state, 'post.entry.meta.created'),
+      author: get(state, 'post.entry.meta.author'),
+      id: get(state, 'post.entry.id')
+    }
+  })
 )(reduxForm({
   form: 'editPost',
   enableReinitialize: true,
   onSubmit: (values, dispatch) => {
     dispatch(updatePost(values));
-  }
+  },
+  onSubmitSuccess: () => history.goBack()
 })(PostEdit));

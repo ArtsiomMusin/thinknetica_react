@@ -7,6 +7,7 @@ const cors = require('cors');
 
 const items = require('./data.js').items;
 const _ = require('lodash');
+const moment = require('moment');
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -29,6 +30,11 @@ function itemsPerPage(items, page) {
   return itemsPagination[page - 1];
 }
 
+function generateItemID() {
+  return Math.random().toString(25).substring(2, 15) +
+    Math.random().toString(25).substring(2, 15);
+}
+
 app.get('/', function(req, res) {
   const {name, page} = req.query;
   let itemsToReturn = items;
@@ -45,6 +51,23 @@ app.get('/posts/:id', function(req, res) {
 app.post('/', function (req, res) {
   const obj = _.find(items, ['id', req.query['id']]);
   obj.meta.likesCount += 1;
+  res.send(obj);
+});
+
+app.post('/posts/new', function (req, res) {
+  const newPost = req.body;
+  const obj = {
+    id: generateItemID(),
+    image: { src: 'https://goo.gl/9CzY5E'},
+    meta: {
+      author: newPost.author,
+      created: moment().format('YYYY-MM-DD'),
+      updated: null,
+      likesCount: 0
+    },
+    text: newPost.title
+  };
+  items.push(obj);
   res.send(obj);
 });
 
