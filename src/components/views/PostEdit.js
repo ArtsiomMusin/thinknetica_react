@@ -6,6 +6,7 @@ import { get } from 'lodash';
 import { updatePost } from 'actions/PostEdit';
 import { FormGroup, ControlLabel, Button } from 'react-bootstrap';
 import history from 'helpers/history';
+import 'react-dates/lib/css/_datepicker.css';
 
 const PostEdit = ({ handleSubmit }) => (
   <FormGroup>

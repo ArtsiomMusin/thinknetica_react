@@ -5,7 +5,10 @@ const app = express();
 
 const cors = require('cors');
 
-const items = require('./data.js').items;
+const data = require('./data.js');
+const items = data.items;
+const contactMessages = data.contactMessages;
+
 const _ = require('lodash');
 const moment = require('moment');
 
@@ -69,6 +72,12 @@ app.post('/posts/new', function (req, res) {
   };
   items.push(obj);
   res.send(obj);
+});
+
+app.post('/contact/new', function (req, res) {
+  const newContactMessage = req.body;
+  contactMessages.push(newContactMessage);
+  res.send(newContactMessage);
 });
 
 app.put('/posts/:id/edit', function (req, res) {

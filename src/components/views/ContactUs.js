@@ -1,10 +1,10 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import ContactUsPage from 'components/containers/ContactUsPage';
+import ContactUsContainer from 'containers/ContactUsContainer';
 
 const ContactUs = () => (
   <div>
-    <ContactUsPage/>
+    <ContactUsContainer/>
     <Helmet title="Contact Us" />
   </div>
 );

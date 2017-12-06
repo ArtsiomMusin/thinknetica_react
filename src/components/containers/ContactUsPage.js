@@ -2,6 +2,9 @@ import React from 'react';
 import { set, assign } from 'lodash/object';
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import { Editor } from 'react-draft-wysiwyg';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import history from 'helpers/history';
 
 class ContactUsPage extends React.Component {
   constructor(props) {
@@ -22,7 +25,8 @@ class ContactUsPage extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log(JSON.stringify(this.state));
+    this.props.sendData(this.state.form.values);
+    history.push('/');
   }
 
   clearErrors(param) {
@@ -35,9 +39,10 @@ class ContactUsPage extends React.Component {
 
   handleChange(param) {
     return (e) => {
-      const value = e.target.value;
+      let value = null;
       switch (param) {
         case 'fullName':
+          value = e.target.value;
           this.clearErrors('fullName');
           if (value.length < 1) {
             this.setState(set(
@@ -48,6 +53,7 @@ class ContactUsPage extends React.Component {
           }
           break;
         case 'email':
+          value = e.target.value;
           this.clearErrors('email');
           if (!/([-_\w.]+)@(([\w]+\.)+)([a-zA-Z]{2,4})/.test(value)) {
             this.setState(set(
@@ -58,6 +64,7 @@ class ContactUsPage extends React.Component {
           }
           break;
         case 'message':
+          value = e.blocks[0].text;
           this.clearErrors('message');
           if (value.length < 1) {
             this.setState(set(
@@ -98,7 +105,6 @@ class ContactUsPage extends React.Component {
             error={this.state.form.errors.email}
           />
           <TextArea
-            name="message"
             value={message}
             label="Message"
             onChange={this.handleChange('message')}
@@ -111,6 +117,9 @@ class ContactUsPage extends React.Component {
   }
 }
 
+ContactUsPage.propTypes = {
+  sendData: PropTypes.func
+};
 
 export default ContactUsPage;
 
@@ -132,17 +141,13 @@ Text.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func,
   label: PropTypes.string,
-  error: PropTypes.boolean
+  error: PropTypes.bool
 };
 
-const TextArea = ({ name, value, onChange, label, error}) => (
+const TextArea = ({ value, onChange, label, error}) => (
   <FormGroup validationState={error ? 'error' : 'success'}>
     <ControlLabel>{label}</ControlLabel>
-    <FormControl
-      name={name}
-      id={name}
-      componentClass="textarea"
-      placeholder="Type your message here"
+    <Editor
       value={value}
       onChange={onChange}
     />
@@ -150,9 +155,8 @@ const TextArea = ({ name, value, onChange, label, error}) => (
 );
 
 TextArea.propTypes = {
-  name: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func,
   label: PropTypes.string,
-  error: PropTypes.boolean
+  error: PropTypes.bool
 };

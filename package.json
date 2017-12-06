@@ -54,6 +54,7 @@
     "react-dates": "^15.3.0",
     "react-dom": "^16.2.0",
     "react-dom-factories": "^1.0.2",
+    "react-draft-wysiwyg": "^1.11.0",
     "react-helmet": "^5.2.0",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",

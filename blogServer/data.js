@@ -83,5 +83,6 @@ module.exports = {
       },
       text: 'One more post 4'
     }
-  ]
+  ],
+  contactMessages: []
 };
