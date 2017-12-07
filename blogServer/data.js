@@ -15,7 +15,13 @@ module.exports = {
         updated: formatDate('20170720'),
         likesCount: 30
       },
-      text: 'I am a good guy'
+      text: 'I am a good guy',
+      comments: [
+        {
+          phone: '123-456-678',
+          text: 'What\'s the ugly man!'
+        }
+      ]
     },
     {
       id: '59f72ed596059543b33bb616',
@@ -26,7 +32,8 @@ module.exports = {
         updated: null,
         likesCount: 45
       },
-      text: 'Flower!'
+      text: 'Flower!',
+      comments: []
     },
     {
       id: '59f72ed596059543b33bb617',
@@ -37,7 +44,8 @@ module.exports = {
         updated: formatDate('19810320'),
         likesCount: 10
       },
-      text: 'Beeball'
+      text: 'Beeball',
+      comments: []
     },
     {
       id: '59f72ed596059543b33bb618',
@@ -48,7 +56,8 @@ module.exports = {
         updated: formatDate('19810320'),
         likesCount: 35
       },
-      text: 'One more post 1'
+      text: 'One more post 1',
+      comments: []
     },
     {
       id: '59f72ed596059543b33bb619',
@@ -59,7 +68,8 @@ module.exports = {
         updated: formatDate('19810320'),
         likesCount: 10
       },
-      text: 'One more post 2'
+      text: 'One more post 2',
+      comments: []
     },
     {
       id: '59f72ed596059543b33bb620',
@@ -70,7 +80,8 @@ module.exports = {
         updated: formatDate('19810320'),
         likesCount: 33
       },
-      text: 'One more post 3'
+      text: 'One more post 3',
+      comments: []
     },
     {
       id: '59f72ed596059543b33bb621',
@@ -81,7 +92,8 @@ module.exports = {
         updated: formatDate('19810320'),
         likesCount: 1
       },
-      text: 'One more post 4'
+      text: 'One more post 4',
+      comments: []
     }
   ],
   contactMessages: []

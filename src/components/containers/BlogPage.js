@@ -4,20 +4,23 @@ import PropTypes from 'prop-types';
 import BlogListContainer from 'containers/BlogListContainer';
 import PieChartContainer from 'containers/PieChartContainer';
 import PostsSearchContainer from 'containers/PostsSearchContainer';
-import { Grid, Row, Col, Button } from 'react-bootstrap';
-import { postCreatePath } from 'helpers/routes';
+import AddPost from 'components/elements/AddPost';
+import { Grid, Row, Col } from 'react-bootstrap';
 
 const BlogPage = () => (
   <Grid>
     <Row className="show-grid">
       <Col sm={6} md={6}>
-        <PostsSearchContainer />
-        <Button bsStyle="primary" href={postCreatePath()}>
-          <span
-            className="glyphicon glyphicon-plus"
-          />
-          Add Post
-        </Button>
+        <div className='smallMargin'>
+          <div className='rows'>
+            <div className='row'>
+              <AddPost className='row'/>
+            </div>
+            <div className='row toRight'>
+              <PostsSearchContainer className='row'/>
+            </div>
+          </div>
+        </div>
         <BlogListContainer />
       </Col>
       <Col sm={6} md={6}>

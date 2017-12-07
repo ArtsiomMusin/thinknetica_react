@@ -15,7 +15,7 @@ const BlogList = (props) => {
   } else {
     list =  _.map(
       props.items,
-      (item, key) => <li className='list-group-item' key={key}>
+      (item, key) => <li key={key}>
         <BlogItem {...item} />
       </li>
     );

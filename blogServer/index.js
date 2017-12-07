@@ -74,6 +74,14 @@ app.post('/posts/new', function (req, res) {
   res.send(obj);
 });
 
+app.post('/comments/new', function (req, res) {
+  const newComment = req.body;
+  const post = _.find(items, ['id', newComment['postId']]);
+  delete newComment.postId;
+  post.comments.push(newComment);
+  res.send(post);
+});
+
 app.post('/contact/new', function (req, res) {
   const newContactMessage = req.body;
   contactMessages.push(newContactMessage);

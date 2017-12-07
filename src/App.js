@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { parse } from 'qs';
 
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
+import './css/main.css';
 
 import { Provider } from 'react-redux';
 import createStore from 'store';

@@ -5,3 +5,4 @@ export const postCreatePath = () => '/posts/new';
 export const RestApiServer = () => 'http://localhost:3001';
 export const aboutPath = () => '/about';
 export const contactUs = () => '/contact';
+export const commentAddPath = () => '/comments/new';

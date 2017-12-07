@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button } from 'react-bootstrap';
 
 const Like = ({count, like}) => (
-  <div style={{fontSize: '24px'}}>
-    <a onClick={like}>
+  <Button onClick={like}>
+    <div style={{fontSize: '14px'}}>
       <span className="glyphicon glyphicon-heart-empty"/>
-    </a>
-    { count != 0 && <span>{count}</span> }
-  </div>
+      { count != 0 && <span>{count}</span> }
+    </div>
+  </Button>
 );
 
 Like.propTypes = {

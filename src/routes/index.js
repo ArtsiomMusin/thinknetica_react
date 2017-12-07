@@ -8,8 +8,9 @@ import About from 'components/views/About';
 import ContactUs from 'components/views/ContactUs';
 import PostEdit from 'components/views/PostEdit';
 import PostCreate from 'components/views/PostCreate';
-import { rootPath, postsPath, aboutPath,
-  contactUs, postEditPath, postCreatePath } from 'helpers/routes';
+import CommentAdd from 'components/views/CommentAdd';
+import { rootPath, postsPath, aboutPath, contactUs, postEditPath,
+  postCreatePath, commentAddPath } from 'helpers/routes';
 import { fetchPosts } from 'actions/Posts';
 import { fetchPost } from 'actions/Post';
 import { map } from 'lodash/collection';
@@ -55,6 +56,10 @@ const routesConst = [
   {
     path: contactUs(),
     component: ContactUs
+  },
+  {
+    path: commentAddPath(),
+    component: CommentAdd
   }
 ];
 
