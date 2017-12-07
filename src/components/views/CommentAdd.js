@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { createComment } from 'actions/CommentAdd';
 import { FormGroup, ControlLabel, Button } from 'react-bootstrap';
 import history from 'helpers/history';
+import normalizePhone from 'helpers/normalizePhone';
 
 const CommentAdd = ({ handleSubmit }) => (
   <FormGroup>
@@ -25,6 +26,8 @@ const CommentAdd = ({ handleSubmit }) => (
           component="input"
           type="text"
           name="phone"
+          placeholder="+xxx(xx)xxx-xx-xx"
+          normalize={normalizePhone}
         />
       </FormGroup>
       <Button type="submit">Create</Button>
