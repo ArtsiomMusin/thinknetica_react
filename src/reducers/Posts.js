@@ -11,6 +11,7 @@ const initialState = {
 function increaseLike(entries, object) {
   const items = values(assign({}, entries));
   const obj = find(items, ['id', object.id]);
+  if (!obj) return items;
   obj.meta.likesCount = object.meta.likesCount;
   return items;
 }

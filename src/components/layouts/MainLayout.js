@@ -27,12 +27,13 @@ const Logo = () => (
 
 const Footer = () => (
   <Well>
-    Powered by Me 8-)
+    <span>Powered by some cool company</span>
+    <div className="toRight"><Link to='/contact'>Contact Us</Link></div>
   </Well>
 );
 
 const About = () => (
-  <div style={{float: 'right'}}>
+  <div className="toRight">
     <Link to='/about'>
       <span className="glyphicon glyphicon-question-sign" />
     </Link>

@@ -1,12 +1,18 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
 
 const cors = require('cors');
 
-const items = require('./data.js').items;
-const _ = require('lodash');
+const data = require('./data.js');
+const items = data.items;
+const contactMessages = data.contactMessages;
 
+const _ = require('lodash');
+const moment = require('moment');
+
+app.use(bodyParser.json());
 app.use(cors());
 
 function filterItems(items, name) {
@@ -27,6 +33,11 @@ function itemsPerPage(items, page) {
   return itemsPagination[page - 1];
 }
 
+function generateItemID() {
+  return Math.random().toString(25).substring(2, 15) +
+    Math.random().toString(25).substring(2, 15);
+}
+
 app.get('/', function(req, res) {
   const {name, page} = req.query;
   let itemsToReturn = items;
@@ -43,6 +54,46 @@ app.get('/posts/:id', function(req, res) {
 app.post('/', function (req, res) {
   const obj = _.find(items, ['id', req.query['id']]);
   obj.meta.likesCount += 1;
+  res.send(obj);
+});
+
+app.post('/posts/new', function (req, res) {
+  const newPost = req.body;
+  const obj = {
+    id: generateItemID(),
+    image: { src: 'https://goo.gl/9CzY5E'},
+    meta: {
+      author: newPost.author,
+      created: moment().format('YYYY-MM-DD'),
+      updated: null,
+      likesCount: 0
+    },
+    text: newPost.title
+  };
+  items.push(obj);
+  res.send(obj);
+});
+
+app.post('/comments/new', function (req, res) {
+  const newComment = req.body;
+  const post = _.find(items, ['id', newComment['postId']]);
+  delete newComment.postId;
+  post.comments.push(newComment);
+  res.send(post);
+});
+
+app.post('/contact/new', function (req, res) {
+  const newContactMessage = req.body;
+  contactMessages.push(newContactMessage);
+  res.send(newContactMessage);
+});
+
+app.put('/posts/:id/edit', function (req, res) {
+  const updatedPost = req.body;
+  const obj = _.find(items, ['id', updatedPost.id]);
+  obj.meta.author = updatedPost.author;
+  obj.meta.created = updatedPost.created;
+  obj.text = updatedPost.title;
   res.send(obj);
 });
 

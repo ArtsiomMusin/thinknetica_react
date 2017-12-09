@@ -42,7 +42,8 @@ export default (req, res) => {
           { initialState, content, head }
         );
       })
-        .catch (() => {
+        .catch ((error) => {
+          console.log(error);
           res.status(500).sendFile('500.html', {root: 'src/components/views/'});
         });
       return match;

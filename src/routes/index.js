@@ -5,7 +5,12 @@ import MainLayout from 'components/layouts/MainLayout';
 import PostsContainer from 'containers/PostsContainer';
 import PostContainer from 'containers/PostContainer';
 import About from 'components/views/About';
-import { rootPath, postsPath, aboutPath } from 'helpers/routes';
+import ContactUs from 'components/views/ContactUs';
+import PostEdit from 'components/views/PostEdit';
+import PostCreate from 'components/views/PostCreate';
+import CommentAdd from 'components/views/CommentAdd';
+import { rootPath, postsPath, aboutPath, contactUs, postEditPath,
+  postCreatePath, commentAddPath } from 'helpers/routes';
 import { fetchPosts } from 'actions/Posts';
 import { fetchPost } from 'actions/Post';
 import { map } from 'lodash/collection';
@@ -22,7 +27,13 @@ const routesConst = [
     component: PostsContainer
   },
   {
+    path: postCreatePath(),
+    exact: true,
+    component: PostCreate
+  },
+  {
     path: postsPath(),
+    exact: true,
     prepareData: (store, query, params) => {
       if (initialLoad()) return;
       return store.dispatch(fetchPost(params.id));
@@ -30,8 +41,25 @@ const routesConst = [
     component: PostContainer
   },
   {
+    path: postEditPath(),
+    exact: true,
+    prepareData: (store, query, params) => {
+      if (initialLoad()) return;
+      return store.dispatch(fetchPost(params.id));
+    },
+    component: PostEdit
+  },
+  {
     path: aboutPath(),
     component: About
+  },
+  {
+    path: contactUs(),
+    component: ContactUs
+  },
+  {
+    path: commentAddPath(),
+    component: CommentAdd
   }
 ];
 

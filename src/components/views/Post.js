@@ -7,7 +7,7 @@ import Helmet from 'react-helmet';
 const Post = (props) => {
   let blogItem = <p>Loading Post...</p>;
   if (props.post) {
-    blogItem = <BlogItem {...props.post} />;
+    blogItem = <BlogItem {...props.post} showComments={true} />;
   }
   return (
     <div>
