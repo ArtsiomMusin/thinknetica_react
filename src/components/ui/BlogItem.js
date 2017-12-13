@@ -101,7 +101,10 @@ BlogItem.propTypes = {
 
 BlogItem.defaultProps = {
   meta: {
-    author: 'Unknown'
+    author: 'Unknown',
+  },
+  image: {
+    src: ''
   }
 };
 

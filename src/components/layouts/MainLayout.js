@@ -20,7 +20,7 @@ export default MainLayout;
 
 const Logo = () => (
   <PageHeader>
-    <Link to='/'>Thinknetica Blog by Artem</Link>
+    <Link id="main" to='/'>Thinknetica Blog by Artem</Link>
     <About />
   </PageHeader>
 );

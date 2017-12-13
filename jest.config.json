@@ -1,0 +1,6 @@
+{
+  "moduleFileExtensions": ["js", "jsx"],
+  "setupFiles": ["<rootDir>/utils/shim.js", "<rootDir>/utils/before_test.js"],
+  "modulePaths": ["<rootDir>/src"],
+  "unmockedModulePathPatterns": ["<rootDir>/node_modules"]
+}
