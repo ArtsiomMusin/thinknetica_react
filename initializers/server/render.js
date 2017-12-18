@@ -5,6 +5,8 @@ import { matchPath, StaticRouter } from 'react-router';
 import { parse } from 'qs';
 import { assign, compact } from 'lodash';
 
+import webpackAsset from './webpackAsset';
+
 import { BlogRoutes, createRoutes } from 'routes';
 import createStore from 'store';
 import prepareData from 'helpers/prepareData';
@@ -39,7 +41,7 @@ export default (req, res) => {
         res.status(200);
         res.render(
           'index',
-          { initialState, content, head }
+          { initialState, content, head, webpackAsset }
         );
       })
         .catch ((error) => {
