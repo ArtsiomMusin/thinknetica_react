@@ -1,12 +1,10 @@
 var plan = require('flightplan');
 
 var tmpDir = 'blog-client-' + new Date().getTime();
-var user = 'react';
+var user = 'artem';
 
-console.log(plan.runtime.options.argv.remain);
-
-plan.traget('production', {
-  host: '',
+plan.target('production', {
+  host: 'localhost',
   username: user,
   agent: process.env.SSH_AUTH_SOCK
 });
