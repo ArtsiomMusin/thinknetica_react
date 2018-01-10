@@ -11,7 +11,7 @@ const AboutPage = () => (
       </TextBox>
     </div>
     <div style={{textAlign: 'center'}}>
-      <Button onClick={() => history.goBack()}>
+      <Button id="about" onClick={() => history.goBack()}>
         Get me out of here!
       </Button>
     </div>

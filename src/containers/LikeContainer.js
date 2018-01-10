@@ -9,6 +9,7 @@ const stateToProps = (state, ownProps) => (
   }
 );
 
+
 const mapDispatchToProps = (dispatch, ownProps) => (
   {
     like: () => {
