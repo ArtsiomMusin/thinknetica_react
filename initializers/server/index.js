@@ -15,22 +15,25 @@ const port = 3000;
 application.set('views', __dirname);
 application.set('view engine', 'ejs');
 
-const webpack = require('webpack');
-const webpackDev = require('webpack-dev-middleware');
-const webpackHot = require('webpack-hot-middleware');
-const config = require('../../webpack.config.js').default;
-const compiler = webpack(config);
-application.use(
-  webpackDev(
-    compiler,
-    {
-      hot: true,
-      publicPath: config.output.publicPath,
-      stats: { color: true }
-    }
-  )
-);
-application.use(webpackHot(compiler));
+if (__DEVELOPMENT__) {
+  const webpack = require('webpack');
+  const webpackDev = require('webpack-dev-middleware');
+  const webpackHot = require('webpack-hot-middleware');
+  const config = require('../webpack/development.js').default;
+  const compiler = webpack(config);
+  application.use(
+    webpackDev(
+      compiler,
+      {
+        hot: true,
+        publicPath: config.output.publicPath,
+        stats: { color: true }
+      }
+    )
+  );
+  application.use(webpackHot(compiler));
+}
+application.use(express.static(path.join(process.cwd(), 'src', 'static')));
 
 const morgan = require('morgan');
 application.use(morgan('common'));

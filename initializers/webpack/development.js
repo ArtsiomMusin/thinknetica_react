@@ -13,7 +13,7 @@ export default {
 
   output: {
     path: path.join(process.cwd(), 'dist'),
-    publicPath: '/asserts/',
+    publicPath: '/assets/',
     filename: 'bundle.js'
   },
 
